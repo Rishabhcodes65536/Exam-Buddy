@@ -1,0 +1,127 @@
+<%- include("./partials/header.ejs") %>
+
+
+<style>
+:root {
+  --btn-bg-light: #007bff; /* Blue color for light mode */
+  --btn-bg-dark: #302447; /* Darker blue for dark mode */
+  --btn-hover-bg-light: #0056b3; /* Darker blue for hover in light mode */
+  --btn-hover-bg-dark: #1c1b2f; /* Darker for hover in dark mode */
+  --btn-border-light: #007bff;
+  --btn-border-dark: #1c1b2f;
+}
+
+.custom-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 15px;
+  font-size: 18px;
+  border: 2px solid var(--btn-border-light);
+  border-radius: 5px;
+  color: #fff;
+  background-color: var(--btn-bg-light);
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.3s, border-color 0.3s;
+}
+
+.custom-btn:hover {
+  background-color: var(--btn-hover-bg-light);
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
+}
+
+/* Dark mode styles */
+body:has(.switch__input:checked) .custom-btn {
+  background-color: var(--btn-bg-dark);
+  border-color: var(--btn-border-dark);
+}
+
+body:has(.switch__input:checked) .custom-btn:hover {
+  background-color: var(--btn-hover-bg-dark);
+  box-shadow: 0 4px 15px rgba(48, 36, 71, 0.5);
+  animation: pulse 1s infinite;
+}
+
+/* Button Animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.7);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  }
+}
+
+body:has(.switch__input:checked) .custom-btn:hover {
+  animation: pulse 1s infinite;
+}
+
+
+
+</style>
+
+
+
+</head>
+<body>
+<section class="d-flex align-items-stretch">
+  <%- include("./partials/side_navbar.ejs") %>
+  <%- include('./partials/switch.ejs') %>
+  <div class="main-content flex-grow-1 d-flex justify-content-center align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center mt-5">
+          <% if (mode == 'answer') { %>
+            <h1 class="quiz-heading"><%= user %>, let's dive deeper with Answer mode</h1>
+          <% } else if (mode == 'metacognition') { %>
+            <h1 class="quiz-heading"><%= user %>, let's Level Up Your Thinking with Metacognition Mode!</h1>
+          <% } %>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md-12 text-center">
+          <% if (mode === 'answer') { %>
+            <p>Ready to test your knowledge and get instant feedback?</p>
+            <p>Answer Mode provides you with practice questions on a variety of topics.</p>
+            <p>Choose your subject below, answer the questions, and Exam Buddy will:</p>
+            <ul class="list-unstyled">
+              <li>Mark your work and explain the answers clearly. ✅</li>
+              <li>Identify any areas you might need to brush up on. 🔍</li>
+            </ul>
+            <p class="mt-4">Select a topic to get started!</p>
+          <% } else if (mode === 'metacognition') { %>
+            <p>Think beyond just getting the answer! Metacognition Mode challenges you to:</p>
+            <ul class="list-unstyled">
+              <li>Unravel the steps 🧩</li>
+              <li>Master the "why" 🧠</li>
+              <li>Boost your problem-solving skills 🚀</li>
+            </ul>
+            <p class="mt-4">Select a topic below and put your thinking to the test!</p>
+          <% } %>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md-12 text-center">
+          <h1 class="topic">Select a Topic</h1>
+          <div class="buttonWrapper">
+            <% topics.forEach(topic => { %>
+              <% if (mode === 'answer') { %>
+                <a class="custom-btn" href="../answer?topic=<%= topic.name %>" role="button"><%= topic.name %></a>
+              <% } else if (mode === 'metacognition') { %>
+                <a class="custom-btn" href="../metacognition?topic=<%= topic.name %>" role="button"><%= topic.name %></a>
+              <% } %>
+            <% }); %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include("./partials/footer.ejs") %>

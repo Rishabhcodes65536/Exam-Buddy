@@ -1,0 +1,123 @@
+<%- include('./partials/header.ejs') %>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawChart2);
+    
+    function drawChart() {
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+            ['Correct', <%= Right %>],
+            ['Incorrect', <%= Wrong %>],
+            ['NA', <%= NA %>]
+        ]);
+
+        // Set chart options
+        var options = {
+            'title':'Answer Mode',
+            'width':400,
+            'height':400,
+            'titleTextStyle': {fontSize: 18, bold: true},
+            'backgroundColor': getBackgroundColor(), // Dynamic background color
+            'legendTextStyle': {color: getTextColor()}, // Dynamic text color for legend
+            'pieSliceTextStyle': {color: getTextColor()}, // Dynamic text color for pie slices
+            'titleTextStyle': {color: getTextColor()}, // Dynamic text color for title
+            'colors': ['#4CAF50', '#F44336', '#FFC107'] // Colors for slices
+        };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('charts_div'));
+        chart.draw(data, options);
+    }
+
+    function drawChart2() {
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+            ['Correct', <%=Right_meta%>],
+            ['Incorrect', <%=Wrong_meta%>],
+            ['NA', <%=NA_meta%>]
+        ]);
+
+        // Set chart options
+        var options = {
+            'title':'Metacognition Mode',
+            'width':400,
+            'height':400,
+            'titleTextStyle': {fontSize: 18, bold: true},
+            'backgroundColor': getBackgroundColor(), // Dynamic background color
+            'legendTextStyle': {color: getTextColor()}, // Dynamic text color for legend
+            'pieSliceTextStyle': {color: getTextColor()}, // Dynamic text color for pie slices
+            'titleTextStyle': {color: getTextColor()}, // Dynamic text color for title
+            'colors': ['#4CAF50', '#F44336', '#FFC107'] // Colors for slices
+        };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('charts_div2'));
+        chart.draw(data, options);
+    }
+
+    // Function to get dynamic background color based on switch__input status
+    function getBackgroundColor() {
+        console.log(document.querySelector('.switch__input'))
+        return document.querySelector('.switch__input:checked') ? '#222' : '#fff'; // Dark or light background color
+    }
+
+    // Function to get dynamic text color based on switch__input status
+    function getTextColor() {
+        // console.log(switch_input)
+        return document.querySelector('.switch__input:checked') ? '#fff' : '#222'; // Light or dark text color
+    }
+</script>
+
+</head>
+<body>
+
+<section class="d-flex flex-column align-items-stretch">
+    <!-- Include the sidebar -->
+    <%- include("./partials/side_navbar.ejs") %>
+    <%- include('./partials/switch.ejs') %>
+    
+    <%- include("./partials/dashboard_navbar.ejs") %>
+
+        <!-- Main content -->
+        <div class="container mb-4">
+            <div class="row">
+                <p>Track the total number of questions attempted and answered correctly across Answer Mode and Metacognition Mode.</p>
+                <div class="col-md-9">
+                    <!-- Track total questions attempted -->
+                    <!-- Pie chart for Answer Mode -->
+                    <div class="chartwrapper">
+                    <div id="charts_div" ></div>
+                    <div id="charts_div2"></div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <!-- Pie chart for Metacognition Mode -->
+                    <!-- Sidebar2 -->
+                    <div class="sidebar2">
+                        <nav class="py-1">
+                            <ul class="flex-column">
+                                <li class="mb-1"><b>Top Knolly Students this Month</b></li>
+                                <% LEADERBOARD.forEach(student => { %>
+                                    <li><%= student %></li>
+                                <% }); %>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+  <!-- Scroll Top -->
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+<div id="preloader"></div>
+<%- include('./partials/footer.ejs') %>

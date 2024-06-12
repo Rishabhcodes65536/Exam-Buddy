@@ -1,0 +1,229 @@
+<%- include('./partials/login_header.ejs') %>
+
+<%- include('./partials/beta_navbar.ejs') %>
+<style>
+  :root {
+  --bg-light: #f8f9fa;
+  --bg-dark: #151923;
+  --text-light: #333;
+  --text-dark: #f5f5ff;
+  --subtext-light: #666;
+  --subtext-dark: #c0c0c0;
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-dark: rgba(255, 255, 255, 0.1);
+}
+
+.welcome-message {
+  background-color: var(--bg-light);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px var(--shadow-light);
+  transition: background-color var(--trans-dur), box-shadow var(--trans-dur);
+}
+
+body:has(.switch__input:checked) .welcome-message {
+  /* background-color: var(--bg-dark);
+   */
+  background-color:#1f2a48;
+  box-shadow: 0 0 10px var(--shadow-dark);
+}
+
+.welcome-message h2 {
+  color: var(--text-light);
+  font-size: 34px;
+  margin-bottom: 15px;
+  transition: color var(--trans-dur);
+}
+
+body:has(.switch__input:checked) .welcome-message h2 {
+  color: var(--text-dark);
+}
+
+.welcome-message p {
+  color: var(--subtext-light);
+  font-size: 16px;
+  margin-bottom: 10px;
+  transition: color var(--trans-dur);
+}
+
+body:has(.switch__input:checked) .welcome-message p {
+  color: var(--subtext-dark);
+}
+
+.welcome-message ul {
+  margin-bottom: 15px;
+  padding-left: 20px;
+}
+
+.welcome-message ul li {
+  color: var(--subtext-light);
+  font-size: 16px;
+  list-style-type: disc;
+  transition: color var(--trans-dur);
+}
+
+body:has(.switch__input:checked) .welcome-message ul li {
+  color: var(--subtext-dark);
+}
+
+.welcome-message img {
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px var(--shadow-light);
+  transition: box-shadow var(--trans-dur);
+}
+
+body:has(.switch__input:checked) .welcome-message img {
+  box-shadow: 0 0 10px var(--shadow-dark);
+}
+
+.form-outline {
+  margin-bottom: 20px;
+}
+
+.text-center {
+  margin-top: 20px;
+}
+
+.big-text p {
+  font-size: 20px;
+}
+
+.big-text ul li {
+  font-size: 20px;
+}
+
+.big-text h2 {
+  font-size: 30px;
+}
+
+/* .beta_container{
+  margin-left: 2.3rem;
+} */
+
+
+
+
+.error-message {
+    color: red;
+    font-size: 0.875rem;
+}
+
+/* login with google section  */
+
+.login-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Equivalent to gap-2 */
+  padding: 0.5rem 1rem; /* Equivalent to px-4 py-2 */
+  border: 1px solid #e2e8f0; /* Equivalent to border-slate-200 */
+  border-radius: 0.5rem; /* Equivalent to rounded-lg */
+  color: #2668d2; /* Equivalent to text-slate-700 */
+  transition: all 150ms ease-in-out; /* Equivalent to transition duration-150 */
+}
+
+.login-button:hover {
+  border-color: #94a3b8; /* Equivalent to hover:border-slate-400 */
+  color: #1e293b; /* Equivalent to hover:text-slate-900 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Equivalent to hover:shadow */
+}
+
+.login-button img {
+  width: 1.5rem; /* Equivalent to w-6 */
+  height: 1.5rem; /* Equivalent to h-6 */
+}
+
+@media (prefers-color-scheme: dark) {
+  .container {
+    background-color: #1f2937; /* Equivalent to dark:bg-gray-800 */
+  }
+  .login-button {
+    border-color: #334155; /* Equivalent to dark:border-slate-700 */
+    color: #e5e7eb; /* Equivalent to dark:text-slate-200 */
+  }
+  .login-button:hover {
+    border-color: #64748b; /* Equivalent to dark:hover:border-slate-500 */
+    color: #d1d5db; /* Equivalent to dark:hover:text-slate-300 */
+  }
+}
+
+/* login with google section ends here  */
+
+</style>
+</header>
+<section class="vh-100">
+  <div class="container-fluid h-custom">
+  <div class="row d-flex justify-content-center h-100 beta_container">
+    <!-- Left Column with Welcome Message -->
+    <div class="col-md-9 col-lg-6 col-xl-6">
+      <div class="welcome-message big-text">
+        <h2>Welcome to Smart Tutor's Beta Test!</h2>
+        <p>We're excited to invite you to participate in the beta test of our brand new AI-powered learning platform designed to help you master your studies.</p>
+        <ul>
+          <li>Interactive quizzes to test your understanding</li>
+          <li>Step-by-step guidance to solve problems effectively</li>
+          <li>An intelligent AI tutor to answer your questions</li>
+        </ul>
+        <p>Ready to join the adventure?</p>
+        <!-- <img src="/assets/img/LoginPage.svg" class="img-fluid" alt="Sample image"> -->
+      </div>
+    </div>
+ 
+
+      <!-- Right Column with Form -->
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 welcome-message">
+        <form method="post" id="loginForm">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">Login</h2>
+        </div>
+        <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start mb-3">
+            <button type="button" class="btn btn-md btn-block btn-primary" style="background-color: #dd4b39;">
+                <a href="/auth/google/" style="text-decoration: none; color: inherit;"><i class="fab fa-google me-2"></i> Sign in with Google</a>
+            </button>
+        </div>
+
+        <div class="divider d-flex align-items-center my-4">
+            <p class="text-center fw-bold mx-3 mb-0">Or</p>
+        </div>
+
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+            <label class="form-label" for="email">Email address</label>
+            <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="Email address" required />
+            <div class="error-message" id="emailError"></div>
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-3">
+            <label class="form-label" for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Enter password" required />
+            <div class="error-message" id="passwordError"></div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center">
+            <!-- Checkbox -->
+            <div class="form-check mb-0">
+                <input class="form-check-input me-2" type="checkbox" value="" id="rememberMe" />
+                <label class="form-check-label" for="rememberMe">
+                    Remember me
+                </label>
+            </div>
+        </div>
+
+        <div class="text-center text-lg-start mt-4 pt-2">
+            <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/register" class="link-danger">Register</a></p>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- Scroll Top -->
+  <!-- <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> -->
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+
+<%- include('./partials/footer.ejs') %>

@@ -1,0 +1,97 @@
+<%- include('./partials/header.ejs') %>
+
+<section class="dashboard d-flex">
+    <!-- Side Navbar -->
+    <%- include('./partials/side_navbar.ejs') %>
+    <%- include('./partials/switch.ejs') %>
+    <!-- Main Content -->
+    <div class="main-content flex-grow-1 d-flex flex-column justify-content-start px-4">
+        <!-- Title and Return Button -->
+        <div class="container mb-4 d-flex justify-content-between align-items-center">
+            <a href="/doubt" class="btn btn-secondary">Return</a>
+            <div>
+                <h2>Summary of Query</h2>
+                <hr class="mb-4">
+            </div>
+            <div></div> <!-- Dummy div -->
+        </div>
+
+        <!-- Question Card -->
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Question</h5>
+                            <p class="card-text"><%= question %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Answer Card -->
+        <div class="container mt-4">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                     <div class="card-body text-center">
+                      <h5 class="card-title">Answer</h5>
+                        <p class="card-text" id="answerContainer"><%-answer%>></p>
+                      </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Follow Up Question Button -->
+        <!-- Follow Up Question Button -->
+    <div class="container mt-4">
+     <div class="row justify-content-center">
+         <div class="col-md-6 follow-buttons">
+                <button id="followUpBtn" class="btn btn-primary btn-block">Ask a Follow Up Question</button>
+                <a href="/doubt" class="btn btn-primary btn-block">Ask question from different topic</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Follow Up Question Section -->
+<div class="container mt-4" id="followUpSection" style="display: none;">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card container mt-4">
+                <div class="card-body container">
+                    <h5 class="card-title follow-up-title">Follow Up Question</h5>
+                    <form id="followUpForm" class="follow-up" action="/doubt?response_type=follow_up" method="POST">
+                           <textarea id="followUpQuestion" name="question" rows="4" cols="50" placeholder="Ask follow up question to knolly" required></textarea>
+                           <button class="btn btn-primary btn-block" type="submit">Submit Follow-up Question</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
+</section>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Toggle visibility of follow-up section
+        document.getElementById("followUpBtn").addEventListener("click", function () {
+            document.getElementById("followUpSection").style.display = "block";
+        });
+
+        // Submit follow-up question using form submission
+        document.getElementById("followUpForm").addEventListener("submit", function (event) {
+            // Prevent default form submission behavior
+            event.preventDefault();
+
+            // Submit the form
+            this.submit();
+        });
+    });
+</script>
+
+
+
+<%- include('./partials/footer.ejs') %>

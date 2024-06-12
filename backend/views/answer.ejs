@@ -1,0 +1,203 @@
+<!-- views/answer.ejs -->
+<%- include("./partials/header.ejs")%>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fuzzco/party-js@3.0.0/dist/party.min.css">
+</head>
+<body>
+<section class="d-flex align-items-stretch">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js" integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js"></script>
+<script>
+function goBack() {
+    console.log("back button clicked");
+    var currentURL = window.location.href;
+    var newURL;
+
+    // Check if the current URL already contains query parameters
+    if (currentURL.indexOf('retry=true') === -1) {
+        // If 'retry=true' not found, append it to the URL
+        if (currentURL.indexOf('?') !== -1) {
+            // If there are existing query parameters, append '&retry=true'
+            newURL = currentURL + '&retry=true';
+        } else {
+            // If there are no existing query parameters, append '?retry=true'
+            newURL = currentURL + '?retry=true';
+        }
+    } else {
+        // 'retry=true' already exists, keep the URL as it is
+        newURL = currentURL;
+    }
+
+    // Log the modified URL for debugging
+    console.log(newURL);
+
+    // Navigate back to the modified URL
+    window.location.href = newURL;
+}
+</script>
+<%- include("./partials/side_navbar.ejs")%>
+<%- include('./partials/switch.ejs') %>
+<div class="container question-content-wrapper">
+    <div class="top-bar d-flex align-items-center  questionheader">
+            <h1 class="title-question">Question on <%= topic %></h1>
+    </div>
+    <div class="top-bar d-flex align-items-center  questionheader back_to">
+        <a href="/topic/answer" class="btn btn-outline-secondary back_to_topic">Back to topic</a>
+    </div>
+    <div class="answer_container glowing-border" id="answer_container">
+        <form class="form" method="post">
+    <input type="hidden" id="question" name="question" value="<%= data.question %>">
+    <input type="hidden" id="marks" name="marks" value="<%= data.marks %>">
+    <input type="hidden" id="topic" name="topic" value="<%= topic %>">
+    <h1 class="title"><%= data.question %></h1>
+    <% if(!locals.abcd) { %>
+    <label for="answer" class="form-label">Steps:</label>
+    <textarea id="answer" name="solution" required="true" rows="5" cols="50" class="Input-Box" placeholder="Enter your answer here" onkeypress="handleKeyPress(event)"></textarea>
+    <label for="final_answer" class="form-label">Final Answer:</label>
+    <textarea id="final_answer" name="final_answer"  required="true" rows="2" cols="50" class="Input-Box-Final" placeholder="Enter your answer here" onkeypress="handleKeyPress(event)"></textarea>
+     <div class="container">
+        <!-- Buttons for integration, differentiation, and exponential -->
+        <label for="answer" class="form-label">Special Symbols:</label>
+        <button type="button" onclick="appendToAnswer('∫')">∫</button>
+        <button type="button" onclick="appendToAnswer('d/dx')">d/dx</button>
+        <button type="button" onclick="appendToAnswer('e^')">e^</button>
+        <button type="button" onclick="appendToAnswer('√')">√</button>
+        <button type="button" onclick="appendToAnswer('∛')">∛</button>
+    </div>
+    <button type="submit" class="btn btn-primary submit-btn" style="margin-bottom: 10px;">Submit</button>
+<a href="javascript:void(0);" onclick="window.location.href = window.location.href;" class="btn btn-secondary submit-btn" style="margin-bottom: 10px;">Skip</a>
+    <% } %>
+            <h3 class="marks">Marks: <%= data.marks %></h3>
+        </form>
+        <% if(locals.abcd){%>
+
+            <%if(data.marks==abcd.response.marks_awarded_to_student){%>
+                <div class="alert alert-success ans_verdict" role="alert">
+                <div class="ans_verdict">Correct Answer Hoorah 🥳!!</div>
+                <div class="marks_awarded">Marks awarded:<%=abcd.response.marks_awarded_to_student%></div>
+                <div class="feedback">
+                <div class="api-feedback"><%-abcd.response.feedback%></div>
+                 <div class="statement">The solution steps you gave was <%-user_solution%></div>
+                <div class="statement">Your final answer was <%-final_answer%></div>
+                <div class="feedback-buttons">
+                    <!-- Thumbs up button -->
+                    <button class="btn btn-success thumbs-up" onclick="updateFeedback('+1')">👍</button>
+                    <!-- Thumbs down button -->
+                    <button class="btn btn-danger thumbs-down" onclick="updateFeedback('-1')">👎</button>
+                </div>
+                </div>
+                </div>
+                <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    console.log("Entered the right mode")
+                    document.getElementById('answer_container').classList.add('green');
+                    console.log(document.getElementById('answer_container'))
+                    party.confetti(document.getElementById('answer_container'), {
+                        count: party.variation.range(20, 50),
+                        spread: 30,
+                        // origin: { x: 0, y: 0 },
+                    });
+                    party.confetti(document.getElementById('answer_container'), {
+                        count: party.variation.range(20,50),
+                        spread: 30,
+                        // origin: { x: 1, y: 0 },
+                    });
+                },setTimeout(500));
+            </script>
+            <%} else{%>
+            <div class="alert alert-danger" role="alert">
+                <div class="ans_verdict">Wrong Answer 😔!!</div>
+                <div class="marks_awarded">Marks awarded:<%=abcd.response.marks_awarded_to_student%></div>
+                <div class="feedback"><%-abcd.response.feedback%></div>
+                <div class="statement">The solution steps you gave was <%-user_solution%></div>
+                <div class="statement">Your final answer was <%-final_answer%></div>
+                <div class="feedback-buttons-wrapper">
+                    <!-- Thumbs up button -->
+                    <button class="btn btn-success thumbs-up" onclick="updateFeedback('+1')">👍</button>
+                    <!-- Thumbs down button -->
+                    <button class="btn btn-danger thumbs-down" onclick="updateFeedback('-1')">👎</button>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    console.log("Entering the wrong mode script")
+                    document.getElementById('answer_container').classList.add('red');
+                    console.log(document.getElementById('answer_container').classList)
+                });
+            </script>
+            <%}%>
+            <a class="custom-btn retry-btn" role="button" href="../answer?topic=<%=topic%>&retry=true">Retry</a>
+            <a class="custom-btn next-ques" role="button" href="../answer?topic=<%=topic%>">Next question<i class="bi bi-arrow-right-short"></i></a>
+        <%}%>
+    </div>
+</div>
+</section>
+</body>
+</html>
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script>
+    // Function to append symbols to the answer textarea
+    function appendToAnswer(symbol) {
+    var answerTextarea = document.getElementById('answer');
+    var cursorPosition = answerTextarea.selectionStart;
+    var answerText = answerTextarea.value;
+    var newText = answerText.substring(0, cursorPosition) + symbol + answerText.substring(cursorPosition);
+    answerTextarea.value = newText;
+    }
+    // Function to append a derivative box
+    function appendDerivativeBox() {
+    var answerDiv = document.getElementById('answer');
+    var derivativeBox = document.createElement('span');
+    derivativeBox.className = 'derivative-box';
+    derivativeBox.contentEditable = true;
+    derivativeBox.style.border = '1px solid black';
+    derivativeBox.style.padding = '2px';
+    derivativeBox.innerHTML = '&boxh;';
+    answerDiv.appendChild(derivativeBox);
+}
+$(document).ready(function() {
+     $("#addDerivativeButton").click(function() {
+        var numeratorBox = $("<div>", {
+            class: "numerator-box derivative-box",
+            contenteditable: true,
+            placeholder: "Numerator"
+        });
+
+        var denominatorBox = $("<div>", {
+            class: "denominator-box derivative-box",
+            contenteditable: true,
+            placeholder: "Denominator"
+        });
+        $("#answer").append("d/d").append(numeratorBox).append(denominatorBox);
+    });
+});
+
+       async function updateFeedback(feedback) {
+        // Make an AJAX request to update the feedback for the student_id
+        // Here you need to replace 'student_id' with the actual student_id of the user
+        const studentId = '<%- student_id %>';
+        const question = '<%- data.question %>';
+        console.log(studentId, question,feedback);
+        // Using Axios for the request
+        axios.post('/updateFeedback', {
+            "student_id": studentId,
+            "question": question,
+            "feedback":feedback
+        })
+        .then(response => {
+            // Handle response
+            console.log(response);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+       }
+
+
+</script>
+
+
+<%- include("./partials/footer.ejs") %>
