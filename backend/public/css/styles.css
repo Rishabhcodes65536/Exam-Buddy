@@ -1292,3 +1292,83 @@ margin-left: 100px;
     --color: rgba(0, 255, 0, 0.8);
     box-shadow: 0 0 10px rgba(0, 255, 0, 0.8), 0 0 20px rgba(0, 255, 0, 0.6), 0 0 30px rgba(0, 255, 0, 0.4), 0 0 40px rgba(0, 255, 0, 0.2);
 }
+
+
+.progress_table{
+  border-radius: 10px;
+}
+
+
+
+
+
+
+
+
+/* leaderboard table  */
+
+
+/* Leaderboard styling */
+.leaderboard {
+    /* background-color: #ffffff; */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard-heading {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.leaderboard-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.leaderboard-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1em; /* Adjust spacing between items */
+    }
+
+    .medal {
+        width: 2em; /* Adjust medal size */
+        height: 2em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5em; /* Adjust font size */
+        color: #FFD700; /* Gold color for medal */
+        margin-right: 0.5em; /* Adjust spacing between medal and name */
+    }
+
+    .leaderboard-name {
+        font-size: 1em; /* Adjust font size */
+    } 
+
+/* Responsive styles */
+@media (max-width: 576px) {
+    .col-md-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+
+
+/* Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .leaderboard-item {
+        animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+    }

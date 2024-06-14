@@ -24,13 +24,35 @@
                 title: 'Practice Activity',
                 subtitle: 'Number of Questions Attempted in Answer Mode and Metacognition Mode'
             },
-            colors: ['#0094FF', '#FF0000']
+            colors: ['#4CAF50', '#F44336'], // Green for Answer Mode, Red for Metacognition Mode
+            animation: {
+                startup: true,
+                duration: 1000,
+                easing: 'out',
+            },
+            legend: { position: 'top', maxLines: 2 },
+            hAxis: {
+                title: 'Number of Questions',
+                minValue: 0,
+                textStyle: { color: '#fff' }, // Dynamic text color for axis labels
+                titleTextStyle: { color: '#fff' } // Dynamic text color for axis title
+            },
+            vAxis: {
+                textStyle: { color: '#fff' }, // Dynamic text color for axis labels
+                titleTextStyle: { color: '#fff' } // Dynamic text color for axis title
+            },
+            backgroundColor: '#1c2131', // Dark background color
         };
 
         var chart = new google.charts.Bar(document.getElementById('answerModeChart'));
         chart.draw(data, google.charts.Bar.convertOptions(options));
+
+        window.addEventListener('resize', function() {
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        });
     }
 </script>
+
 
 </head>
 <body>

@@ -3,12 +3,12 @@
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
     google.charts.setOnLoadCallback(drawChart2);
-    
+
     function drawChart() {
         // Create the data table.
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
+        data.addColumn('string', 'Verdict');
+        data.addColumn('number', 'Count');
         data.addRows([
             ['Correct', <%= Right %>],
             ['Incorrect', <%= Wrong %>],
@@ -17,15 +17,20 @@
 
         // Set chart options
         var options = {
-            'title':'Answer Mode',
-            'width':400,
-            'height':400,
+            'title': 'Answer Mode',
+            'width': 400,
+            'height': 400,
             'titleTextStyle': {fontSize: 18, bold: true},
             'backgroundColor': getBackgroundColor(), // Dynamic background color
             'legendTextStyle': {color: getTextColor()}, // Dynamic text color for legend
             'pieSliceTextStyle': {color: getTextColor()}, // Dynamic text color for pie slices
             'titleTextStyle': {color: getTextColor()}, // Dynamic text color for title
-            'colors': ['#4CAF50', '#F44336', '#FFC107'] // Colors for slices
+            'colors': ['#4CAF50', '#F44336', '#FFC107'], // Colors for slices
+            'animation': {
+                'startup': true,
+                'duration': 1000,
+                'easing': 'out'
+            },
         };
 
         // Instantiate and draw our chart, passing in some options.
@@ -36,25 +41,36 @@
     function drawChart2() {
         // Create the data table.
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
+        data.addColumn('string', 'Verdict');
+        data.addColumn('number', 'Count');
         data.addRows([
-            ['Correct', <%=Right_meta%>],
-            ['Incorrect', <%=Wrong_meta%>],
-            ['NA', <%=NA_meta%>]
+            ['Correct', <%= Right_meta %>],
+            ['Incorrect', <%= Wrong_meta %>],
+            ['NA', <%= NA_meta %>]
         ]);
 
         // Set chart options
         var options = {
-            'title':'Metacognition Mode',
-            'width':400,
-            'height':400,
+            'title': 'Metacognition Mode',
+            'width': 400,
+            'height': 400,
             'titleTextStyle': {fontSize: 18, bold: true},
             'backgroundColor': getBackgroundColor(), // Dynamic background color
             'legendTextStyle': {color: getTextColor()}, // Dynamic text color for legend
             'pieSliceTextStyle': {color: getTextColor()}, // Dynamic text color for pie slices
             'titleTextStyle': {color: getTextColor()}, // Dynamic text color for title
-            'colors': ['#4CAF50', '#F44336', '#FFC107'] // Colors for slices
+            'colors': ['#4CAF50', '#F44336', '#FFC107'], // Colors for slices
+            'animation': {
+                'startup': true,
+                'duration': 1000,
+                'easing': 'out'
+            },
+            
+            'slices': {
+                0: {offset: 0.1},
+                1: {offset: 0.1},
+                2: {offset: 0.1}
+            }
         };
 
         // Instantiate and draw our chart, passing in some options.
@@ -64,15 +80,25 @@
 
     // Function to get dynamic background color based on switch__input status
     function getBackgroundColor() {
-        console.log(document.querySelector('.switch__input'))
-        return document.querySelector('.switch__input:checked') ? '#222' : '#fff'; // Dark or light background color
+        return '#1c2131'; // Dark or light background color
     }
 
     // Function to get dynamic text color based on switch__input status
     function getTextColor() {
-        // console.log(switch_input)
-        return document.querySelector('.switch__input:checked') ? '#fff' : '#222'; // Light or dark text color
+        return '#fff'; // Light or dark text color
     }
+
+
+
+
+
+
+
+
+    //medals section
+
+
+    
 </script>
 
 </head>
@@ -98,18 +124,27 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <!-- Pie chart for Metacognition Mode -->
-                    <!-- Sidebar2 -->
-                    <div class="sidebar2">
-                        <nav class="py-1">
-                            <ul class="flex-column">
-                                <li class="mb-1"><b>Top Knolly Students this Month</b></li>
-                                <% LEADERBOARD.forEach(student => { %>
-                                    <li><%= student %></li>
-                                <% }); %>
-                            </ul>
-                        </nav>
-                    </div>
+    <!-- Professional Leaderboard -->
+
+    <div class="leaderboard">
+        <h3 class="leaderboard-heading">Top Knolly Students this Month</h3>
+        <ul class="leaderboard-list">
+        <% var emojis = ['🥇', '🥈', '🥉']; %>
+            <% LEADERBOARD.forEach((student, index) => { %>
+                <li class="leaderboard-item">
+                    <% if (index < 3) { %>
+                        <span class="medal"><%= emojis[index] %></span>
+                        <span class="leaderboard-name"><%= student %></span>
+                    <% } else {%>
+                    <span class="medal"><%= index+1 %></span>
+                    <span class="leaderboard-name"><%= student %></span>
+                    <%}%>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+</div>
+
                 </div>
             </div>
         </div>
@@ -120,4 +155,5 @@
 
   <!-- Preloader -->
 <div id="preloader"></div>
+
 <%- include('./partials/footer.ejs') %>

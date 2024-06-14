@@ -15,6 +15,11 @@ height: 100%;
 }
 
 
+.welcome-message{
+  margin-top: 10vh;
+}
+
+
 .beta_logo {
   margin-left: 3.4rem;
   max-height: 9vh;
@@ -97,7 +102,7 @@ body:has(.switch__input:checked) .header,
 body:has(.switch__input:checked) .header_beta {
   color: var(--nav-text-dark);
   /* background-color: var(--nav-dark); */
-  background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+  background: linear-gradient(112.1deg, rgb(63, 76, 119), rgb(32, 38, 57) 11.4% 70.2%);
   box-shadow: 0px 0 15px var(--nav-shadow-dark);
 }
 

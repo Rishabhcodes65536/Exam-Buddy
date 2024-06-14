@@ -1,4 +1,117 @@
 <%- include("./partials/header.ejs") %>
+<style>
+/* Light mode (default) variables */
+:root {
+    --table-bg-color: #ffffff;
+    --table-text-color: #000000;
+    --row-bg-color: #f9f9f9;
+    --progress-bg-color: #e9ecef;
+    --label-text-color: #000000;
+}
+
+/* Table styling */
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    background-color: var(--table-bg-color);
+    color: var(--table-text-color);
+}
+
+.table td, .table th {
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: var(--row-bg-color);
+}
+
+.table th {
+    text-align: left;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Progress bar styling */
+.progress {
+    position: relative;
+    height: 25px;
+    background-color: var(--progress-bg-color);
+    border-radius: 12.5px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    transition: width 1s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-radius: 12.5px;
+}
+
+/* Progress bar colors */
+.red {
+    background-color: #F44336;
+}
+
+.yellow {
+    background-color: #FFC107;
+}
+
+.green {
+    background-color: #4CAF50;
+}
+
+.light-green {
+    background-color: #8BC34A;
+}
+
+.dark-green {
+    background-color: #388E3C;
+}
+
+/* Progress label styling */
+.progress-label {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--label-text-color);
+}
+
+/* Dark mode variables */
+body:has(.switch__input:checked)  .row {
+    --table-bg-color: #1c2131;
+    --table-text-color: #ffffff;
+    --row-bg-color: #2c3141;
+    --progress-bg-color: #3c4151;
+    --label-text-color: #ffffff;
+}
+
+/* Apply dark mode styles */
+body:has(.switch__input:checked) .col-md-12 .table {
+    background-color: var(--table-bg-color);
+    color: var(--table-text-color);
+}
+
+body:has(.switch__input:checked) .col-md-12 .table td {
+    background-color: var(--row-bg-color);
+    color:#00ffffbe;
+}
+
+body:has(.switch__input:checked) .col-md-12 .progress {
+    background-color: var(--progress-bg-color);
+}
+
+body:has(.switch__input:checked) .col-md-12 .progress-label {
+    color: var(--label-text-color);
+}
+
+
+</style>
 </head>
 <body>
 
@@ -9,7 +122,7 @@
     <!-- Main Content -->
     <%-include('./partials/dashboard_navbar.ejs')%>
 
-        <div class="container bg-light p-4" style="flex-grow: 1;">
+        <div class="container  p-4" style="flex-grow: 1;">
             <div class="row">
                 <div class="col-md-12 mb-4">
                     <h5>Track the completion rate of practice questions and performance within each topic</h5>
@@ -17,7 +130,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table">
+                    <table class="table progress_table">
                         <thead class="visually-hidden">
                             <tr>
                                 <th>Subject</th>
