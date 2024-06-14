@@ -51,28 +51,28 @@
   <!-- Preloader -->
 <div id="preloader"></div>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const darkModeSwitch = document.querySelector('.switch__input');
-    const answerImage = document.getElementById('answer-image');
-    const metaImage = document.getElementById('meta-image');
-    console.log(darkModeSwitch)
-    console.log(answerImage)
-    // Function to change the image based on dark mode state
-    function updateImage() {
-        if (darkModeSwitch.checked) {
-            answerImage.src = '/assets/img/dark_answer.webp';
-            metaImage.src = '/assets/img/dark_meta.webp';
-        } else {
-            answerImage.src = '/assets/img/light_answer.webp';
-            metaImage.src = '/assets/img/Meta_light.jpg';
-        }
-    }
+    document.addEventListener('DOMContentLoaded', function () {
+            const darkModeSwitch = document.querySelector('.switch__input');
+            const answerImage = document.getElementById('answer-image');
+            const metaImage = document.getElementById('meta-image');
 
-    // Initial image update
-    updateImage();
+            function updateImages() {
+                if (darkModeSwitch.checked) {
+                  console.log("In here dark mode")
+                    answerImage.src = '/assets/img/dark_answer.webp';
+                    metaImage.src = '/assets/img/dark_meta.webp';
+                } else {
+                    console.log("In here light mode")
+                    answerImage.src = '/assets/img/light_answer.webp';
+                    metaImage.src = '/assets/img/Meta_light.jpg';
+                }
+            }
 
-    // Add event listener for the switch
-    darkModeSwitch.addEventListener('change', updateImage);
-});
+            // Initial check
+            updateImages();
+
+            // Add event listener to handle switch toggling
+            darkModeSwitch.addEventListener('change', updateImages);
+        });
 </script>
 <%- include('./partials/footer.ejs') %>
