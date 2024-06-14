@@ -35,7 +35,7 @@
               <div class="modes card text-center">
                 <div class="card-body">
                   <h2 class="card-title">Metacognition Mode</h2>
-                  <img src="/assets/img/dark_meta.webp" class="img-fluid mt-3 mb-3 mx-auto d-block" alt="Sample Image">
+                  <img src="/assets/img/Meta_light.jpg" class="img-fluid mt-3 mb-3 mx-auto d-block" id="meta-image" alt="Sample Image">
                   <p class="card-text"><b>Level Up Your Learning:</b> Go beyond just getting the answer! This mode challenges you to order the steps needed to solve a problem, building critical thinking skills and a deeper understanding.</p>
                   <a href="/topic/metacognition" class="btn btn-primary">Try Now</a>
                 </div>
@@ -54,14 +54,17 @@
 document.addEventListener("DOMContentLoaded", function() {
     const darkModeSwitch = document.querySelector('.switch__input');
     const answerImage = document.getElementById('answer-image');
+    const metaImage = document.getElementById('meta-image');
     console.log(darkModeSwitch)
     console.log(answerImage)
     // Function to change the image based on dark mode state
     function updateImage() {
         if (darkModeSwitch.checked) {
             answerImage.src = '/assets/img/dark_answer.webp';
+            metaImage.src = '/assets/img/dark_meta.webp';
         } else {
             answerImage.src = '/assets/img/light_answer.webp';
+            metaImage.src = '/assets/img/Meta_light.jpg';
         }
     }
 
