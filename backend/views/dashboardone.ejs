@@ -1,8 +1,14 @@
 <%- include('./partials/header.ejs') %>
 <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
     google.charts.setOnLoadCallback(drawChart2);
+
+    document.getElementById('darkModeSwitch').addEventListener('change', function() {
+        drawChart();
+        drawChart2();
+    });
 
     function drawChart() {
         // Create the data table.
@@ -21,11 +27,11 @@
             'width': 400,
             'height': 400,
             'titleTextStyle': {fontSize: 18, bold: true},
-            'backgroundColor': getBackgroundColor(), // Dynamic background color
-            'legendTextStyle': {color: getTextColor()}, // Dynamic text color for legend
-            'pieSliceTextStyle': {color: getTextColor()}, // Dynamic text color for pie slices
-            'titleTextStyle': {color: getTextColor()}, // Dynamic text color for title
-            'colors': ['#4CAF50', '#F44336', '#FFC107'], // Colors for slices
+            'backgroundColor': getBackgroundColor(),
+            'legendTextStyle': {color: getTextColor()},
+            'pieSliceTextStyle': {color: getTextColor()},
+            'titleTextStyle': {color: getTextColor()},
+            'colors': ['#4CAF50', '#F44336', '#FFC107'],
             'animation': {
                 'startup': true,
                 'duration': 1000,
@@ -55,11 +61,11 @@
             'width': 400,
             'height': 400,
             'titleTextStyle': {fontSize: 18, bold: true},
-            'backgroundColor': getBackgroundColor(), // Dynamic background color
-            'legendTextStyle': {color: getTextColor()}, // Dynamic text color for legend
-            'pieSliceTextStyle': {color: getTextColor()}, // Dynamic text color for pie slices
-            'titleTextStyle': {color: getTextColor()}, // Dynamic text color for title
-            'colors': ['#4CAF50', '#F44336', '#FFC107'], // Colors for slices
+            'backgroundColor': getBackgroundColor(),
+            'legendTextStyle': {color: getTextColor()},
+            'pieSliceTextStyle': {color: getTextColor()},
+            'titleTextStyle': {color: getTextColor()},
+            'colors': ['#4CAF50', '#F44336', '#FFC107'],
             'animation': {
                 'startup': true,
                 'duration': 1000,
@@ -72,28 +78,18 @@
         chart.draw(data, options);
     }
 
-    // Function to get dynamic background color based on switch__input status
     function getBackgroundColor() {
-        return '#1c2131'; // Dark or light background color
+        console.log(document.getElementById('darkModeSwitch').checked);
+        return !document.getElementById('darkModeSwitch').checked ? '#ffffff' : '#1c2131';
     }
 
-    // Function to get dynamic text color based on switch__input status
     function getTextColor() {
-        return '#fff'; // Light or dark text color
+        console.log(document.getElementById('darkModeSwitch').checked);
+        return !document.getElementById('darkModeSwitch').checked ? '#000000' : '#ffffff';
     }
-
-
-
-
-
-
-
-
-    //medals section
-
-
-    
+    });
 </script>
+
 
 </head>
 <body>

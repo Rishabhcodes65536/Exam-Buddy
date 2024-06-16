@@ -1,59 +1,78 @@
 <%- include('./partials/header.ejs') %>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script>
-    google.charts.load('current', {'packages':['bar']});
-    google.charts.setOnLoadCallback(drawChart);
+<script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            google.charts.load('current', {'packages':['bar']});
+            google.charts.setOnLoadCallback(drawChart);
 
-    function drawChart() {
-        var combinedData = <%- JSON.stringify(combinedData) %>;
-        var topicVariables = <%- JSON.stringify(topicVariables) %>;
+            document.getElementById('darkModeSwitch').addEventListener('change', function() {
+                drawChart();
+            });
 
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topic');
-        data.addColumn('number', 'Answer Mode');
-        data.addColumn('number', 'Metacognition Mode');
+            function drawChart() {
+                var combinedData = <%- JSON.stringify(combinedData) %>;
+                var topicVariables = <%- JSON.stringify(topicVariables) %>;
 
-        topicVariables.forEach(topicVariable => {
-            var answerCount = combinedData[topicVariable]?.answer || 0; // If data for answer mode is not available, use 0
-            var metacognitionCount = combinedData[topicVariable]?.metacognition || 0; // If data for metacognition mode is not available, use 0
-            data.addRow([topicVariable, answerCount, metacognitionCount]);
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Topic');
+                data.addColumn('number', 'Answer Mode');
+                data.addColumn('number', 'Metacognition Mode');
+
+                topicVariables.forEach(topicVariable => {
+                    var answerCount = combinedData[topicVariable]?.answer || 0;
+                    var metacognitionCount = combinedData[topicVariable]?.metacognition || 0;
+                    data.addRow([topicVariable, answerCount, metacognitionCount]);
+                });
+
+                var options = {
+                    chart: {
+                        title: 'Practice Activity',
+                        subtitle: 'Number of Questions Attempted in Answer Mode and Metacognition Mode',
+                        titleTextStyle: { color: getTextColor(), fontSize: 18, bold: true },
+                        subtitleTextStyle: { color: getTextColor(), fontSize: 14 }
+                    },
+                    colors: getBarColors(),
+                    animation: {
+                        startup: true,
+                        duration: 1000,
+                        easing: 'out',
+                    },
+                    legend: { position: 'top', maxLines: 2, textStyle: { color: getTextColor() } },
+                    hAxis: {
+                        title: 'Number of Questions',
+                        minValue: 0,
+                        textStyle: { color: getTextColor() },
+                        titleTextStyle: { color: getTextColor() }
+                    },
+                    vAxis: {
+                        textStyle: { color: getTextColor() },
+                        titleTextStyle: { color: getTextColor() }
+                    },
+                    backgroundColor: getBackgroundColor(),
+                    bar: { groupWidth: "75%" }
+                };
+
+                var chart = new google.charts.Bar(document.getElementById('answerModeChart'));
+                chart.draw(data, google.charts.Bar.convertOptions(options));
+
+                window.addEventListener('resize', function() {
+                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                });
+            }
+
+            function getBackgroundColor() {
+                return document.getElementById('darkModeSwitch').checked ? '#1c2131' : '#ffffff';
+            }
+
+            function getTextColor() {
+                return document.getElementById('darkModeSwitch').checked ? '#ffffff' : '#000000';
+            }
+
+            function getBarColors() {
+                return document.getElementById('darkModeSwitch').checked ? ['#80C684', '#E57373'] : ['#4CAF50', '#F44336'];
+            }
         });
-
-        var options = {
-            chart: {
-                title: 'Practice Activity',
-                subtitle: 'Number of Questions Attempted in Answer Mode and Metacognition Mode'
-            },
-            colors: ['#4CAF50', '#F44336'], // Green for Answer Mode, Red for Metacognition Mode
-            animation: {
-                startup: true,
-                duration: 1000,
-                easing: 'out',
-            },
-            legend: { position: 'top', maxLines: 2 },
-            hAxis: {
-                title: 'Number of Questions',
-                minValue: 0,
-                textStyle: { color: '#fff' }, // Dynamic text color for axis labels
-                titleTextStyle: { color: '#fff' } // Dynamic text color for axis title
-            },
-            vAxis: {
-                textStyle: { color: '#fff' }, // Dynamic text color for axis labels
-                titleTextStyle: { color: '#fff' } // Dynamic text color for axis title
-            },
-            backgroundColor: '#1c2131', // Dark background color
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('answerModeChart'));
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-
-        window.addEventListener('resize', function() {
-            chart.draw(data, google.charts.Bar.convertOptions(options));
-        });
-    }
-</script>
-
-
+    </script>
 </head>
 <body>
 <section class="d-flex flex-column align-items-stretch">

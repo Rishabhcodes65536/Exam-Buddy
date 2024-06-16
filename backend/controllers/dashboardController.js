@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import axios from "axios"
 import questionModel from "../models/question.js";
+import userModel from './../models/user.js';
 
 const getRandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -8,84 +9,187 @@ const getRandomInt = (min, max) => {
 
 
 class dashboardController{
- static getQuestionStats = async (req, res) => {
-    try {
+//  static getQuestionStats = async (req, res) => {
+//     try {
         
-        const questions = await questionModel.find({
-            student_id: req.session._id
-        });
+//         const questions = await questionModel.find({
+//             student_id: req.session._id
+//         });
 
-        const answerQuestions = questions.filter(question => {
-            return question.mode === 'answer' || !question.mode;
-        });
-        const metaQuestions = questions.filter(question => question.mode === 'metacognition');
+//         const answerQuestions = questions.filter(question => {
+//             return question.mode === 'answer' || !question.mode;
+//         });
+//         const metaQuestions = questions.filter(question => question.mode === 'metacognition');
 
      
-        const totalQuestions = questions.length;
-        const totalAnswerQuestions = answerQuestions.length;
-        const totalMetaQuestions = metaQuestions.length;
+//         const totalQuestions = questions.length;
+//         const totalAnswerQuestions = answerQuestions.length;
+//         const totalMetaQuestions = metaQuestions.length;
 
 
-        const rightAnswers = questions.reduce((acc, question) => {
+//         const rightAnswers = questions.reduce((acc, question) => {
             
-            if (question.allocated_marks === question.total_marks) {
-                return acc + 1;
-            } else {
-                return acc;
-            }
-        }, 0);
-        const rightAnswersMeta = metaQuestions.reduce((acc, question) => {
-            if (question.allocated_marks === question.total_marks) {
-                return acc + 1;
-            } else {
-                return acc;
-            }
-        }, 0);
+//             if (question.allocated_marks === question.total_marks) {
+//                 return acc + 1;
+//             } else {
+//                 return acc;
+//             }
+//         }, 0);
+//         const rightAnswersMeta = metaQuestions.reduce((acc, question) => {
+//             if (question.allocated_marks === question.total_marks) {
+//                 return acc + 1;
+//             } else {
+//                 return acc;
+//             }
+//         }, 0);
 
 
-        const wrongAnswers = totalQuestions - rightAnswers;
-        const wrongAnswersMeta = totalMetaQuestions - rightAnswersMeta;
+//         const wrongAnswers = totalQuestions - rightAnswers;
+//         const wrongAnswersMeta = totalMetaQuestions - rightAnswersMeta;
 
    
-        const notAttempted = 100 - (totalQuestions ? ((rightAnswers + wrongAnswers) / totalQuestions) * 100 : 0);
-        const notAttemptedMeta = 100 - (totalMetaQuestions ? ((rightAnswersMeta + wrongAnswersMeta) / totalMetaQuestions) * 100 : 0);
+//         const notAttempted = 100 - (totalQuestions ? ((rightAnswers + wrongAnswers) / totalQuestions) * 100 : 0);
+//         const notAttemptedMeta = 100 - (totalMetaQuestions ? ((rightAnswersMeta + wrongAnswersMeta) / totalMetaQuestions) * 100 : 0);
 
-        const chartData = [
-            { label: 'Right', value: rightAnswers },
-            { label: 'Right_meta', value: rightAnswersMeta },
-            { label: 'Wrong', value: wrongAnswers },
-            { label: 'Wrong_meta', value: wrongAnswersMeta },
-            { label: 'NA', value: notAttempted },
-            { label: 'NA_meta', value: notAttemptedMeta }
-        ];
+//         const chartData = [
+//             { label: 'Right', value: rightAnswers },
+//             { label: 'Right_meta', value: rightAnswersMeta },
+//             { label: 'Wrong', value: wrongAnswers },
+//             { label: 'Wrong_meta', value: wrongAnswersMeta },
+//             { label: 'NA', value: notAttempted },
+//             { label: 'NA_meta', value: notAttemptedMeta }
+//         ];
 
-        console.log(chartData);
-        const requestData = {
-  number: 10
-};
-const headers = {
-  'Accept': '*/*',
-  'Content-Type': 'application/json'
-};
-        const TOP_STUDENTS=await axios.post('http://20.42.62.249:8084/internal/question_generation/analyse/analyse_with_top', requestData, { headers });
-        console.log(TOP_STUDENTS.data.student_rank_with_order);
-        const TOP_DATA=TOP_STUDENTS.data.student_rank_with_order;
-        res.render('dashboardone.ejs', {
-            "Right": chartData[0].value,
-            "Right_meta": chartData[1].value,
-            "Wrong": chartData[2].value,
-            "Wrong_meta": chartData[3].value,
-            "NA": chartData[4].value,
-            "NA_meta": chartData[5].value,
-            "page_id": '1',
-            "name": req.session.name.split(' ')[0],
-            LEADERBOARD:TOP_DATA
-        });
-    } catch (error) {
-        console.error('Error fetching question stats:', error);
-        throw error;
+//         console.log(chartData);
+//         const requestData = {
+//   number: 10
+// };
+// const headers = {
+//   'Accept': '*/*',
+//   'Content-Type': 'application/json'
+// };
+//         const TOP_STUDENTS=await axios.post('http://20.42.62.249:8084/internal/question_generation/analyse/analyse_with_top', requestData, { headers });
+//         console.log(TOP_STUDENTS.data.student_rank_with_order);
+//         const TOP_DATA=TOP_STUDENTS.data.student_rank_with_order;
+//         res.render('dashboardone.ejs', {
+//             "Right": chartData[0].value,
+//             "Right_meta": chartData[1].value,
+//             "Wrong": chartData[2].value,
+//             "Wrong_meta": chartData[3].value,
+//             "NA": chartData[4].value,
+//             "NA_meta": chartData[5].value,
+//             "page_id": '1',
+//             "name": req.session.name.split(' ')[0],
+//             LEADERBOARD:TOP_DATA
+//         });
+//     } catch (error) {
+//         console.error('Error fetching question stats:', error);
+//         throw error;
+//     }
+    // }
+    
+//This code don't call the API instead formulates the logic itself
+static getQuestionStats = async (req, res) => {
+        try {
+            const questions = await questionModel.find({
+                student_id: req.session._id
+            });
+
+            const answerQuestions = questions.filter(question => {
+                return question.mode === 'answer' || !question.mode;
+            });
+            const metaQuestions = questions.filter(question => question.mode === 'metacognition');
+
+            const totalQuestions = questions.length;
+            const totalAnswerQuestions = answerQuestions.length;
+            const totalMetaQuestions = metaQuestions.length;
+
+            const rightAnswers = questions.reduce((acc, question) => {
+                return question.allocated_marks === question.total_marks ? acc + 1 : acc;
+            }, 0);
+            const rightAnswersMeta = metaQuestions.reduce((acc, question) => {
+                return question.allocated_marks === question.total_marks ? acc + 1 : acc;
+            }, 0);
+
+            const wrongAnswers = totalQuestions - rightAnswers;
+            const wrongAnswersMeta = totalMetaQuestions - rightAnswersMeta;
+
+            const notAttempted = 100 - (totalQuestions ? ((rightAnswers + wrongAnswers) / totalQuestions) * 100 : 0);
+            const notAttemptedMeta = 100 - (totalMetaQuestions ? ((rightAnswersMeta + wrongAnswersMeta) / totalMetaQuestions) * 100 : 0);
+
+            const chartData = [
+                { label: 'Right', value: rightAnswers },
+                { label: 'Right_meta', value: rightAnswersMeta },
+                { label: 'Wrong', value: wrongAnswers },
+                { label: 'Wrong_meta', value: wrongAnswersMeta },
+                { label: 'NA', value: notAttempted },
+                { label: 'NA_meta', value: notAttemptedMeta }
+            ];
+
+            console.log(chartData);
+
+            // Top students logic
+            const number = 10; // Assuming you want the top 10 students
+
+            const pipeline = [
+                {
+                    "$group": {
+                        "_id": "$student_id",
+                        "correct_answers": {
+                            "$sum": {
+                                "$cond": [
+                                    { "$eq": ["$allocated_marks", "$total_marks"] },
+                                    1,
+                                    0
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "$sort": {
+                        "correct_answers": -1
+                    }
+                },
+                {
+                    "$limit": number
+                },
+                {
+                    "$project": {
+                        "_id": 0,
+                        "student_id": "$_id"
+                    }
+                }
+            ];
+
+            const result = await questionModel.aggregate(pipeline).exec();
+            const top_students = result.map(doc => doc.student_id);
+
+            const student_list = [];
+            for (let student_id of top_students) {
+                const student = await userModel.findOne({ _id: student_id });
+                student_list.push(student.name.split()[0]);
+            }
+
+            const TOP_DATA = student_list;
+            console.log(TOP_DATA);
+
+            res.render('dashboardone.ejs', {
+                "Right": chartData[0].value,
+                "Right_meta": chartData[1].value,
+                "Wrong": chartData[2].value,
+                "Wrong_meta": chartData[3].value,
+                "NA": chartData[4].value,
+                "NA_meta": chartData[5].value,
+                "page_id": '1',
+                "name": req.session.name.split(' ')[0],
+                LEADERBOARD: TOP_DATA
+            });
+        } catch (error) {
+            console.error('Error fetching question stats:', error);
+            res.status(500).send('Internal Server Error');
+        }
     }
-}
 
 
 static getSubjectMastery = async (req, res) => {
