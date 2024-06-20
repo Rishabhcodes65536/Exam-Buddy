@@ -93,7 +93,6 @@
 
 </head>
 <body>
-
 <section class="d-flex flex-column align-items-stretch">
     <!-- Include the sidebar -->
     <%- include("./partials/side_navbar.ejs") %>
@@ -101,45 +100,42 @@
     
     <%- include("./partials/dashboard_navbar.ejs") %>
 
-        <!-- Main content -->
-        <div class="container mb-4">
-            <div class="row">
+    <!-- Main content -->
+    <div class="mb-4">
+        <div class="row">
                 <p>Track the total number of questions attempted and answered correctly across Answer Mode and Metacognition Mode.</p>
-                <div class="col-md-9">
-                    <!-- Track total questions attempted -->
-                    <!-- Pie chart for Answer Mode -->
-                    <div class="chartwrapper">
+            <div class="col-md-9">
+                <!-- Track total questions attempted -->
+                <!-- Pie chart for Answer Mode -->
+                <div class="chartwrapper">
                     <div id="charts_div" ></div>
                     <div id="charts_div2"></div>
-                    </div>
                 </div>
-                <div class="col-md-3">
-    <!-- Professional Leaderboard -->
-
-    <div class="leaderboard">
-        <h3 class="leaderboard-heading">Top Exam Buddy Students this Month</h3>
-        <ul class="leaderboard-list">
-        <% var emojis = ['🥇', '🥈', '🥉']; %>
-            <% LEADERBOARD.forEach((student, index) => { %>
-                <li class="leaderboard-item">
-                    <% if (index < 3) { %>
-                        <span class="medal"><%= emojis[index] %></span>
-                        <span class="leaderboard-name"><%= student %></span>
-                    <% } else {%>
-                    <span class="medal"><%= index+1 %></span>
-                    <span class="leaderboard-name"><%= student %></span>
-                    <%}%>
-                </li>
-            <% }) %>
-        </ul>
-    </div>
-</div>
-
+            </div>
+            <div class="col-md-3">
+                <!-- Professional Leaderboard -->
+                <div class="leaderboard">
+                    <h3 class="leaderboard-heading">Top Exam Buddy Students this Month</h3>
+                    <ul class="leaderboard-list">
+                        <% var emojis = ['🥇', '🥈', '🥉']; %>
+                        <% LEADERBOARD.forEach((student, index) => { %>
+                            <li class="leaderboard-item">
+                                <% if (index < 3) { %>
+                                    <span class="medal"><%= emojis[index] %></span>
+                                    <span class="leaderboard-name"><%= student %></span>
+                                <% } else {%>
+                                    <span class="medal"><%= index+1 %></span>
+                                    <span class="leaderboard-name"><%= student %></span>
+                                <%}%>
+                            </li>
+                        <% }) %>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
   <!-- Scroll Top -->
 <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

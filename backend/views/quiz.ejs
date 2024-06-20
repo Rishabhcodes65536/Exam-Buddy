@@ -1,50 +1,51 @@
 <%- include('./partials/header.ejs') %>
 </head>
 <body>
- <section class="d-flex align-items-stretch">
-      <%- include('./partials/side_navbar.ejs')%>
-      <%- include('./partials/switch.ejs') %>
-      <div class="main-content flex-grow-1 d-flex justify-content-center align-items-center">
-        <div class="custom-container"> <!-- Added custom-container class -->
-          <div class="row">
-            <div class="col-md-12 text-center mb-5">
-              <h1 class="quiz-heading">Hi <%=user%>, welcome to Quiz mode</h1>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-9 mx-auto"> <!-- Changed to col-md-9 and centered -->
-              <div class="Content text-center">
-                <p>Want to test your knowledge and master key concepts? Dive into Exam Buddy's Quiz Mode!</p>
-                <p>Choose your topic, answer practice questions, and get instant feedback with step-by-step explanations.</p>
-                <p>Whether you're a quick study or need a deeper dive, Exam Buddy's Quiz Mode will help you ace your exams and boost your confidence.</p>
-              </div>
-            </div>
-          </div>
-          <div class="row my-5">
-            <div class="col-md-6 mb-5"> <!-- Changed from col-md-12 to col-md-6 -->
-              <div class="modes card text-center">
-                <div class="card-body">
-                  <h2 class="card-title">Answer Mode</h2>
-                  <img src="/assets/img/light_answer.webp" class="img-fluid mt-3 mb-3 mx-auto d-block" id="answer-image" alt="Sample Image">
-                  <p class="card-text"><b>Test Your Skills:</b> Practice exam-style questions and get instant feedback on your answers. Exam Buddy will mark your work and provide clear explanations to all your problems.</p>
-                  <a href="/topic/answer" class="btn btn-primary">Try Now</a>
+ <section class="d-flex">
+    <%- include('./partials/side_navbar.ejs') %>
+    <%- include('./partials/switch.ejs') %>
+    <div class="main-content flex-grow-1 d-flex justify-content-center align-items-center">
+        <div class="container custom-container"> <!-- Added container class -->
+            <div class="row">
+                <div class="col-md-12 text-center mb-5">
+                    <h1 class="quiz-heading">Hi <%=user%>, welcome to Quiz mode</h1>
                 </div>
-              </div>
             </div>
-            <div class="col-md-6 mb-5"> <!-- Changed from col-md-12 to col-md-6 -->
-              <div class="modes card text-center">
-                <div class="card-body">
-                  <h2 class="card-title">Metacognition Mode</h2>
-                  <img src="/assets/img/Meta_light.jpg" class="img-fluid mt-3 mb-3 mx-auto d-block" id="meta-image" alt="Sample Image">
-                  <p class="card-text"><b>Level Up Your Learning:</b> Go beyond just getting the answer! This mode challenges you to order the steps needed to solve a problem, building critical thinking skills and a deeper understanding.</p>
-                  <a href="/topic/metacognition" class="btn btn-primary">Try Now</a>
+            <div class="row">
+                <div class="col-md-9 mx-auto">
+                    <div class="content text-center"> <!-- Changed Content to content and added container class -->
+                        <p>Want to test your knowledge and master key concepts? Dive into Exam Buddy's Quiz Mode!</p>
+                        <p>Choose your topic, answer practice questions, and get instant feedback with step-by-step explanations.</p>
+                        <p>Whether you're a quick study or need a deeper dive, Exam Buddy's Quiz Mode will help you ace your exams and boost your confidence.</p>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
+            <div class="row my-5">
+                <div class="col-md-6 mb-4"> <!-- Changed from col-md-12 to col-md-6 and adjusted margin -->
+                    <div class="modes card text-center">
+                        <div class="card-body">
+                            <h2 class="card-title">Answer Mode</h2>
+                            <img src="/assets/img/light_answer.webp" class="img-fluid mt-3 mb-3 mx-auto d-block" id="answer-image" alt="Sample Image">
+                            <p class="card-text"><b>Test Your Skills:</b> Practice exam-style questions and get instant feedback on your answers. Exam Buddy will mark your work and provide clear explanations to all your problems.</p>
+                            <a href="/topic/answer" class="btn btn-primary">Try Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4"> <!-- Changed from col-md-12 to col-md-6 and adjusted margin -->
+                    <div class="modes card text-center">
+                        <div class="card-body">
+                            <h2 class="card-title">Metacognition Mode</h2>
+                            <img src="/assets/img/Meta_light.jpg" class="img-fluid mt-3 mb-3 mx-auto d-block" id="meta-image" alt="Sample Image">
+                            <p class="card-text"><b>Level Up Your Learning:</b> Go beyond just getting the answer! This mode challenges you to order the steps needed to solve a problem, building critical thinking skills and a deeper understanding.</p>
+                            <a href="/topic/metacognition" class="btn btn-primary">Try Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
+
   <!-- Scroll Top -->
 <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

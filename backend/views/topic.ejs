@@ -10,7 +10,6 @@
   --btn-border-light: #007bff;
   --btn-border-dark: #1c1b2f;
 }
-
 .custom-btn {
   display: inline-block;
   padding: 10px 20px;
@@ -22,13 +21,15 @@
   background-color: var(--btn-bg-light);
   text-decoration: none;
   transition: background-color 0.3s, transform 0.3s, border-color 0.3s;
+  flex: 1 1 calc(33.333% - 30px); /* Flex properties for responsiveness */
+  box-sizing: border-box;
 }
 
 .custom-btn:hover {
   background-color: var(--btn-hover-bg-light);
   transform: scale(1.05);
   box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
-  color:#FFDAB9
+  color: #FFDAB9;
 }
 
 /* Dark mode styles */
@@ -44,6 +45,26 @@ body:has(.switch__input:checked) .custom-btn:hover {
   animation: pulse 1s infinite;
   color: #00FFFF;
 }
+
+/* Flex container for buttons */
+.buttonWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px;
+}
+
+/* Ensure proper margin on smaller screens */
+@media (max-width: 576px) {
+  .custom-btn {
+    flex: 1 1 100%; /* Full width on small screens */
+    margin: 10px 0; /* Adjust margin for better spacing */
+    font-size: 16px; /* Adjust font size for smaller screens */
+  }
+}
+
 
 /* Button Animation */
 @keyframes pulse {
@@ -112,7 +133,7 @@ body:has(.switch__input:checked) .custom-btn:hover {
       <div class="row mt-4">
         <div class="col-md-12 text-center">
           <h1 class="topic">Select a Topic</h1>
-          <div class="buttonWrapper">
+          <div class="buttonWrapper"> <!-- Flex container for buttons -->
             <% topics.forEach(topic => { %>
               <% if (mode === 'answer') { %>
                 <a class="custom-btn" href="../answer?topic=<%= topic.name %>" role="button"><%= topic.name %></a>
@@ -126,5 +147,6 @@ body:has(.switch__input:checked) .custom-btn:hover {
     </div>
   </div>
 </section>
+
 
 <%- include("./partials/footer.ejs") %>

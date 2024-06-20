@@ -252,6 +252,10 @@ body:has(.switch__input:checked) .sidebar {
     background: linear-gradient(180deg, #1F253E 0%, #2E344E 100%);
 }
 
+body:has(.switch__input:checked) .navbar-collapse {
+    background: linear-gradient(180deg, #1F253E 0%, #2E344E 100%);
+}
+
 /* Nav links */
 .nav-link {
     color: #495057; /* Light text color */

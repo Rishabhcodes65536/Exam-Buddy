@@ -72,18 +72,19 @@
             <hr class="d-inline-block w-25 mx-4 border-dark" id="hr-left" />
         </header>
 
-        <!-- Question Container Cards -->
+                <!-- Question Container Cards -->
         <div class="container mt-4" id="question-container">
             <% recentDoubts.forEach((doubt, index) => { %>
                 <div class="card mb-3" id="card-<%= index %>">
-                    <div class="card-body recent-card justify-content-between">
-                        <h5 class="card-title card-title-custom"><%= doubt.question %></h5>
-                        <p class="card-text card-text-custom"><%= doubt.solution %></p>
+                    <div class="card-body recent-card d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center text-center text-md-left">
+                        <h5 class="card-title card-title-custom mb-3 mb-md-0"><%= doubt.question %></h5>
                         <a href="/doubt/<%= doubt._id %>?response_type=follow_up" class="btn btn-primary view-summary-btn">View Summary</a>
                     </div>
                 </div>
             <% }); %>
         </div>
+
+
         <hr class="d-inline-block w-25 mx-4 border-dark" id="hr-right" />
     </div>
 </section>

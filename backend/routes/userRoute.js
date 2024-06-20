@@ -21,7 +21,8 @@ const fetchUserName = async (req, res, next) => {
 // Register fetchUserName middleware in your controller
 router.use(fetchUserName);
 
-router.get("/",userController.login)
+router.get("/", userController.login)
+router.get("/myhomepage", userController.openHome)
 router.post("/",userController.validateLogin)
 router.get("/login",userController.login)
 router.post("/login",userController.validateLogin)

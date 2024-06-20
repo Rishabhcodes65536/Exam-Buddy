@@ -63,7 +63,7 @@ function goBack() {
         <button type="button" onclick="appendToAnswer('√')">√</button>
         <button type="button" onclick="appendToAnswer('∛')">∛</button>
     </div>
-    <button type="submit" class="btn btn-primary submit-btn" style="margin-bottom: 10px;">Submit</button>
+    <button type="submit" class="btn btn-primary submit-btn " style="margin-bottom: 10px;">Submit</button>
 <a href="javascript:void(0);" onclick="window.location.href = window.location.href;" class="btn btn-secondary submit-btn" style="margin-bottom: 10px;">Skip</a>
     <% } %>
             <h3 class="marks">Marks: <%= data.marks %></h3>
@@ -125,8 +125,10 @@ function goBack() {
                 });
             </script>
             <%}%>
+            <div class="button_wrap">
             <a class="custom-btn retry-btn" role="button" href="../answer?topic=<%=topic%>&retry=true">Retry</a>
             <a class="custom-btn next-ques" role="button" href="../answer?topic=<%=topic%>">Next question<i class="bi bi-arrow-right-short"></i></a>
+            </div>
         <%}%>
     </div>
 </div>
@@ -198,6 +200,36 @@ $(document).ready(function() {
 
 
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the answer_container element
+    var answerContainer = document.getElementById('answer_container');
+    
+    // Get the back_to_topic element
+    var backToTopic = document.querySelector('.back_to_topic');
+    
+    // Get the bounding client rect of the answer_container
+    var rect = answerContainer.getBoundingClientRect();
+    
+    // Calculate the left position
+    var leftPosition = rect.left + window.scrollX;
+    
+    // Set the left position for the back_to_topic element
+    backToTopic.style.position = 'absolute';
+    backToTopic.style.left = leftPosition + 'px';
+
+    backToTopic.style.marginTop = '4vh'; // Adjust the top margin as needed
+    backToTopic.style.marginBottom = '10vh'; // Adjust the bottom margin as needed
+
+    window.addEventListener('resize', function() {
+        rect = answerContainer.getBoundingClientRect();
+        leftPosition = rect.left + window.scrollX;
+        backToTopic.style.left = leftPosition + 'px';
+    });
+});
+</script>
+
 
 
 <%- include("./partials/footer.ejs") %>

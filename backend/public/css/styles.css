@@ -537,7 +537,7 @@ footer .container{
   }
 
   .hero p {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 24px;
     margin-bottom: 30px;
   }
@@ -805,13 +805,34 @@ body, html {
   background-color: white;
 }
 
-.back_to_container{
+/* .back_to_container{
 margin-left: 100px;
-}
+} */
 
 .back_to a{
-  margin-right: 37.7vw;
-  margin-bottom: 3vh;
+  /* margin-right: 37.7vw; */
+  margin-bottom: 5vh;
+}
+
+.back_to_topic {
+    width: auto;
+    padding: 10px 20px;
+}
+
+
+.top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    text-align: center;
+}
+  
+
+.container.question-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* .sidebar {
@@ -825,35 +846,155 @@ margin-left: 100px;
   z-index: 1 !important;
   padding:20px !important;
 } */
-
+/* General Sidebar Styles */
 .sidebar {
-    width: 135px; /* Adjust width as needed */
-    height: 100% !important;
-    position: fixed !important;
+  width: 135px; /* Adjust width as needed */
+  height: 100vh; /* Full viewport height */
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  z-index: 1;
+  padding: 2vh; /* Use viewport height for padding */
+  background-color: #2A3891;
+  transition: background-color 0.3s ease, width 0.3s ease;
+}
+
+/* Desktop Navigation */
+@media (min-width: 800px) {
+  .sidebar {
+    display: block;
+  }
+
+  .navbar-toggler,
+  .navbar-collapse {
+    display: none;
+  }
+
+  .contents {
+    margin-left: 15vw; 
+  }
+}
+
+/* Mobile Navigation */
+@media (max-width: 799px) {
+  .sidebar {
+    display: none;
+    /* width:10px; */
+  }
+
+  .navbar-toggler {
+    display: block;
+    position: fixed;
+    top: 2vh;
+    left: 2vw;
+    z-index: 1001;
+    color: #2A3891;
+    font-size: 30px; 
+    line-height: 0;
+    /* margin-right: 10px; */
+    cursor: pointer;
+    transition: color 0.3s;
+    background-color: transparent;
+    border: none;
+  }
+
+  .navbar-collapse {
+    display: none;
+    position: fixed;
     top: 0;
     left: 0;
-    overflow-x: hidden !important;
-    z-index: 1 !important;
-    padding: 20px !important;
-    background-color: #2A3891;
-    transition: background-color 0.3s ease;
+    width: 100%;
+    height: 100%;
+    background-color:var(--accent-color); 
+    z-index: 1000;
+    overflow-y: auto;
+    transition: all 0.3s;
+  }
+
+  
+
+  .navbar-collapse.show {
+    display: block;
+  }
+
+  .navbar-collapse ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .navbar-collapse ul li {
+    padding: 10px 20px;
+  }
+
+  .navbar-collapse ul li a {
+    color: #2A3891;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+    transition: color 0.3s;
+  }
+
+  .navbar-collapse ul li a:hover {
+    color: #ddd;
+  }
+
+  .contents {
+    margin-left: 0; /* Ensure content takes full width on mobile */
+  }
 }
 
 
 
 
+
+
+
+/* 
 .main-content {
   flex: 1;
   margin-left:150px;
   margin-top:50px;
+  flex-grow: 1;
+  padding: 20px;
+} */
+
+/* General Styles for main-content */
+.main-content {
+  flex: 1;
+  margin-top: 50px;
+  transition: margin-left 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  .sidebar {
-    width: 20%;
-    align-items: flex-start;
+/* Desktop Navigation */
+@media (min-width: 1200px) {
+  .main-content {
+    margin-left: 150px; /* Adjust this value based on your sidebar width */
+  }
+}
+
+/* Mobile Navigation */
+@media (max-width: 1199px) {
+  .main-content {
+    margin-left: 10px; /* Remove the margin on mobile */
   }
 
+  /* Ensure the content adjusts when the sidebar is toggled */
+  .navbar-collapse.show ~ .main-content {
+    margin-left: 0; /* Ensure no margin when the sidebar is shown */
+  }
+}
+
+
+@media (max-width: 768px) {
+  /* .sidebar {
+    width: 20%;
+    align-items: flex-start;
+  } */
+  #doubt-textarea {
+    width: 80vw;
+  }
 }
 
 /* body {
@@ -889,25 +1030,43 @@ margin-left: 100px;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  /* width: 50%; */
+  flex-grow: 2;
 }
+
+.nav-item-mob img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 .nav-item-logo{
   margin-bottom: 100px;
+}
+.nav-item-logo-mob{
+  margin-bottom: 0px;
 }
 
 .quiz-heading{
   margin-top: 50px;
 }
 
-/* Bootstrap animations on hovers */
 .nav-item:hover {
     background-color: rgba(255, 255, 255, 0.1); 
-    transition: background-color 0.3s ease; /* Add transition effect */
+    transition: background-color 0.3s ease; 
+}
+.nav-item-mob:hover {
+    background-color: rgba(255, 255, 255, 0.1); 
+    transition: background-color 0.3s ease; 
 }
 
 .nav-item a:hover {
-    color: #fff; /* Change text color on hover */
-    transition: color 0.3s ease; /* Add transition effect */
+    color: #fff; 
+    transition: color 0.3s ease; 
+}
+.nav-item-mob a:hover {
+    color: #fff; 
+    transition: color 0.3s ease; 
 }
 
 .img-container{
@@ -942,10 +1101,7 @@ margin-left: 100px;
   align-items: stretch;
 }
 
-.main-content {
-  flex-grow: 1;
-  padding: 20px;
-}
+
 
 .custom-navbar {
   margin-bottom: 20px;
@@ -1351,10 +1507,10 @@ margin-left: 100px;
 
 /* Responsive styles */
 @media (max-width: 576px) {
-    .col-md-3 {
+    /* .col-md-3 {
         flex: 0 0 100%;
         max-width: 100%;
-    }
+    } */
 }
 
 
@@ -1372,3 +1528,95 @@ margin-left: 100px;
     .leaderboard-item {
         animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
     }
+
+
+
+
+    @media (max-width:472px){
+      .button_wrap{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+      .card-title{
+        font-size: 14px;
+      }
+      .card-text{
+        font-size: 12px;
+      }
+      a .view-summary-btn{
+        font-size: 2px;
+      }
+      #central-heading{
+        font-size: 16px;
+      }
+      .summ-btn{
+        font-size: 10px !important;
+      }
+      .summ-wrap{
+        /* display: flex; */
+        /* justify-content: center; */
+        align-items: center;
+        flex-direction: row;
+      }
+      #followUpQuestion::placeholder {
+        font-size: 0.8rem;
+      }
+      #followUpForm{
+        width:86%
+      }
+    }
+
+
+
+    @media (max-width:500px){
+      .quiz-heading{
+        font-size:22px
+      }
+      .content p{
+        font-size: 16px;
+        font-weight: 400;
+      }
+      .custom-btn {
+      font-size: 14px; /* Adjust font size for smaller screens */
+      }
+    }
+    @media (max-width:392px){
+      .quiz-heading{
+        font-size: 16px;
+      }
+      .content p{
+        font-size: 13px;
+        font-weight: 300;
+      }
+    }
+
+
+    @media (max-width:1052px){
+      .chartwrapper{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+      .leaderboard{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+      .leaderboard-heading{
+        display: flex;
+        flex-direction: row;
+        /* flex-wrap: wrap; */
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+
+

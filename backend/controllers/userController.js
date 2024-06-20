@@ -5,6 +5,9 @@ class userController{
     static home =(req,res)=>{
         res.render("login.ejs")
     }
+    static openHome = (req, res) => {
+        res.render("index.ejs")
+    }
     static register =(req,res)=>{
         res.render("register_beta.ejs")
     }
