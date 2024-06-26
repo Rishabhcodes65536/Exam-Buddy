@@ -26,7 +26,7 @@ body {
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);/* Adjust box-shadow values */
         width: 80%; /* Adjust the initial width if needed */
-        max-width: 60%; /* Ensure it doesn't overflow the viewport */
+        max-width: 90%; /* Ensure it doesn't overflow the viewport */
         }
 
         .title {
@@ -82,6 +82,11 @@ body {
     padding: 10px 0; /* Add padding */
 }
 
+@media (max-width: 790px){
+    .meta_container{
+        width:90vw
+    }
+}
 
 @media (max-width: 465px){
     .answer_container{
