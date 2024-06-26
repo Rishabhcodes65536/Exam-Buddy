@@ -32,7 +32,15 @@
 .table-responsive {
     overflow-x: auto;
 }
-
+.topic-name {
+  width: 40%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.progress-cell {
+  width: 60%;
+}
 /* Progress bar styling */
 .progress {
     position: relative;
@@ -111,6 +119,43 @@ body:has(.switch__input:checked) .col-md-12 .progress-label {
 }
 
 
+/* Responsive styles */
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .main-content {
+    width: 100%;
+  }
+
+  .sidebar2 {
+    width: 100%;
+    margin-top: 0px;
+  }
+
+  .table th, .table td {
+    padding: 10px;
+  }
+
+  h5 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .progress {
+    height: 20px;
+  }
+
+  .progress-label {
+    font-size: 0.8rem;
+  }
+
+  .sidebar2 {
+    margin-top: 5px;
+  }
+}
 </style>
 </head>
 <body>
@@ -122,7 +167,7 @@ body:has(.switch__input:checked) .col-md-12 .progress-label {
     <!-- Main Content -->
     <%-include('./partials/dashboard_navbar.ejs')%>
 
-        <div class="container  p-4" style="flex-grow: 1;">
+        <div class="container p-4" style="flex-grow: 1;">
             <div class="row">
                 <div class="col-md-12 mb-4">
                     <h5>Track the completion rate of practice questions and performance within each topic</h5>
@@ -139,9 +184,9 @@ body:has(.switch__input:checked) .col-md-12 .progress-label {
                         </thead>
                         <tbody>
                             <% accuracyData.forEach(topic => { %>
-                            <tr>
-                                <td><%= topic.topic %></td>
-                                <td>
+                            <tr >
+                                <td class="topic-name"><%= topic.topic %></td>
+                                <td class="progress-cell">
                                     <div class="progress">
                                         <div class="progress-bar <%= topic.accuracy < 20 ? 'red' : topic.accuracy < 40 ? 'yellow' : topic.accuracy < 60 ? 'green' : topic.accuracy < 80 ? 'light-green' : 'dark-green' %>" role="progressbar" style="width: <%= topic.accuracy %>%;"></div>
                                         <span class="progress-label"><%= topic.accuracy %>%</span>
