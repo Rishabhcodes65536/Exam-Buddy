@@ -31,7 +31,9 @@ const MongoStore = connectMongo(session);
 const app=express()
 
 app.use(cors());
-app.use(express.json());
+// app.use(express.json());
+app.set("views", "./views");
+
 const port=process.env.PORT || '3000'
 const API_ENDPOINT=process.env.API_ENDPOINT
 const SOLUTION_API_ENDPOINT=process.env.SOLUTION_API_ENDPOINT
