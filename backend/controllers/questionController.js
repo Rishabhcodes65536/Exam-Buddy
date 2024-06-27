@@ -229,6 +229,7 @@ static handleSolution = async (req, res) => {
             })
             const mongodbSaving = await questionDoc.save();
             console.log(mongodbSaving);
+            req.session.answer_attempted = true;
             const obj = {
                 question: question,
                 marks: marks
@@ -306,6 +307,7 @@ static handleSolution = async (req, res) => {
         })
         const mongoSving=await questionDoc.save();
         console.log(mongoSving);
+        req.session.meta_attempted = true;
         res.render('metacognition.ejs', { 
             question, 
             steps:steps, 
