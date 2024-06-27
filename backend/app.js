@@ -32,7 +32,7 @@ const app=express()
 
 app.use(cors());
 // app.use(express.json());
-app.set("views", "./views");
+app.set("views", path.join(__dirname, "views"));
 
 const port=process.env.PORT || '3000'
 const API_ENDPOINT=process.env.API_ENDPOINT
