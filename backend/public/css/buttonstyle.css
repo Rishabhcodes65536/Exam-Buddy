@@ -9,14 +9,14 @@
 
 :root {
 	--hue: 223;
-	--primary: rgb(26, 115, 232); /* Converted from hsl(223, 90%, 50%) */
+	--primary: rgb(26, 115, 232); 
 	--trans-dur: 0.6s;
 	--trans-timing: cubic-bezier(0.65, 0, 0.35, 1);
 
-	--light-bg-color: rgb(255, 255, 255); /* Light background color */
-	--light-text-color: rgb(25, 27, 31); /* Light text color */
-	--dark-bg-color: rgb(21, 25, 35); /* Dark background color */
-	--dark-text-color: rgb(245, 245, 255); /* Dark text color */
+	--light-bg-color: rgb(255, 255, 255); 
+	--light-text-color: rgb(25, 27, 31); 
+	--dark-bg-color: rgb(21, 25, 35); 
+	--dark-text-color: rgb(245, 245, 255); 
 
 
 
@@ -70,7 +70,7 @@ body:has(.switch__input:checked) {
 }
 
 .switch__icon {
-	color: rgba(207, 208, 214, 0.8); /* Converted from hsla(var(--hue), 10%, 80%) */
+	color: rgba(207, 208, 214, 0.8);
 	pointer-events: none;
 	position: absolute;
 	top: 0.375em;
@@ -117,7 +117,7 @@ body:has(.switch__input:checked) {
 }
 
 .switch__inner-icons .switch__icon {
-	color: rgb(255, 255, 255); /* Converted from hsl(0, 0%, 100%) */
+	color: rgb(255, 255, 255); 
 	top: 0.125em;
 	left: 0.125em;
 	transform: translateX(1.25em);
@@ -129,9 +129,9 @@ body:has(.switch__input:checked) {
 }
 
 .switch__input {
-	background-color: rgb(255, 255, 255); /* Converted from hsl(0, 0%, 100%) */
+	background-color: rgb(255, 255, 255);
 	border-radius: 0.75em;
-	box-shadow: 0 0 0 0.0625em rgba(26, 115, 232, 0), 0 0.125em 0.5em rgba(25, 27, 31, 0.1); /* Adjusted for RGB */
+	box-shadow: 0 0 0 0.0625em rgba(26, 115, 232, 0), 0 0.125em 0.5em rgba(25, 27, 31, 0.1); 
 	outline: transparent;
 	width: 2.75em;
 	height: 1.5em;
@@ -141,12 +141,11 @@ body:has(.switch__input:checked) {
 }
 
 .switch__input:checked {
-	/* background-color: rgb(25, 27, 31); Converted from hsl(var(--hue), 10%, 10%) */
 	background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
 }
 
 .switch__input:checked ~ .switch__icon {
-	color: rgba(51, 53, 57, 1); /* Converted from hsla(var(--hue), 10%, 40%) */
+	color: rgba(51, 53, 57, 1); 
 }
 
 .switch__input:checked ~ .switch__inner:before,
@@ -210,25 +209,25 @@ body:has(.switch__input:checked) .card-body {
 
 /* Placeholder visibility in dark mode */
 body:has(.switch__input:checked) .form-control::placeholder {
-    color: rgba(245, 245, 255, 0.6); /* Lighter placeholder color in dark mode */
+    color: rgba(245, 245, 255, 0.6); 
 }
 
 /* Button primary */
 .btn-primary {
-    background-color: rgb(26, 115, 232); /* Light mode button color */
-    color: white; /* Light mode text color */
-    border-color: rgb(26, 115, 232); /* Light mode border color */
+    background-color: rgb(26, 115, 232); 
+    color: white; 
+    border-color: rgb(26, 115, 232); 
 }
 
 body:has(.switch__input:checked) .btn-primary {
-    background-color: rgb(63, 76, 119); /* Dark mode button color */
-    border-color: rgb(63, 76, 119); /* Dark mode border color */
+    background-color: rgb(63, 76, 119); 
+    border-color: rgb(63, 76, 119); 
 }
 
 /* Glowing effect for text areas in dark mode */
 body:has(.switch__input:checked) .form-control{
     box-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color), 0 0 30px var(--glow-color);
-    animation: glowing 1.5s infinite alternate; /* Glowing animation */
+    animation: glowing 1.5s infinite alternate; 
 }
 
 @keyframes glowing {
@@ -243,7 +242,7 @@ body:has(.switch__input:checked) .form-control{
 
 
 
-/* //sidebar /// */
+/* //sidebar /// */*
 
 
 
@@ -258,12 +257,12 @@ body:has(.switch__input:checked) .navbar-collapse {
 
 /* Nav links */
 .nav-link {
-    color: #495057; /* Light text color */
+    color: #495057; 
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body:has(.switch__input:checked) .nav-link {
-    color: #FFFFFF; /* Dark text color */
+    color: #FFFFFF; 
 }
 
 
@@ -316,7 +315,7 @@ body:has(.switch__input:checked) .solution-cards-container {
 
 body:has(.switch__input:checked) .answer_container {
     background: linear-gradient(135deg, #20232a 0%, #2c3241 100%);
-    color: #ccc; /* Light gray text color for dark mode */
+    color: #ccc; 
 }
 
 .Input-Box, .Input-Box-Final {

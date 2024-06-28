@@ -4,6 +4,6 @@ $(document).ready(function () {
     console.log("Waiting period!!");
     $("#overlay").show();
     $("body").children().not("#overlay").addClass("blurred");
-    this.submit(); // proceed with the form submission
+    this.submit(); 
   });
 });

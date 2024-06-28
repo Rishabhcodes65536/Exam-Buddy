@@ -5,7 +5,7 @@
     <%- include('./partials/side_navbar.ejs') %>
     <%- include('./partials/switch.ejs') %>
     <div class="main-content flex-grow-1 d-flex justify-content-center align-items-center">
-        <div class="container custom-container"> <!-- Added container class -->
+        <div class="container custom-container"> 
             <div class="row">
                 <div class="col-md-12 text-center mb-5">
                     <h1 class="quiz-heading">Hi <%=user%>, welcome to Quiz mode</h1>
@@ -13,7 +13,7 @@
             </div>
             <div class="row">
                 <div class="col-md-9 mx-auto">
-                    <div class="content text-center"> <!-- Changed Content to content and added container class -->
+                    <div class="content text-center"> 
                         <p>Want to test your knowledge and master key concepts? Dive into Exam Buddy's Quiz Mode!</p>
                         <p>Choose your topic, answer practice questions, and get instant feedback with step-by-step explanations.</p>
                         <p>Whether you're a quick study or need a deeper dive, Exam Buddy's Quiz Mode will help you ace your exams and boost your confidence.</p>
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="row my-5">
-                <div class="col-md-6 mb-4"> <!-- Changed from col-md-12 to col-md-6 and adjusted margin -->
+                <div class="col-md-6 mb-4">
                     <div class="modes card text-center">
                         <div class="card-body">
                             <h2 class="card-title">Answer Mode</h2>
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4"> <!-- Changed from col-md-12 to col-md-6 and adjusted margin -->
+                <div class="col-md-6 mb-4">
                     <div class="modes card text-center">
                         <div class="card-body">
                             <h2 class="card-title">Metacognition Mode</h2>
@@ -68,11 +68,7 @@
                     metaImage.src = '/assets/img/Meta_light.jpg';
                 }
             }
-
-            // Initial check
             updateImages();
-
-            // Add event listener to handle switch toggling
             darkModeSwitch.addEventListener('change', updateImages);
         });
 </script>

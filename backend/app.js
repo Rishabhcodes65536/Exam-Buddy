@@ -20,12 +20,11 @@ const __dirname = path.resolve();
 dotenv.config();
 import './auth.js'
 
-//session feature
 
 import session from "express-session";
 import connectMongo from "connect-mongo";
 
-// Create a MongoStore instance to store sessions in MongoDB
+
 const MongoStore = connectMongo(session);
 
 const app=express()
@@ -45,12 +44,12 @@ import connectDB from "./db/connectdb.js";
 //session middleware
 
 app.use(session({
-    secret: process.env.secret_key, // Change this to a secure key
+    secret: process.env.secret_key,
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({ url: DATABASE_URI }), // Store session data in MongoDB
+    store: new MongoStore({ url: DATABASE_URI }), 
     cookie: {
-        maxAge: 60 * 60 * 1000*24, // Session expires after 24 hours
+        maxAge: 60 * 60 * 1000*24,
     }
 }));
 
@@ -92,10 +91,7 @@ app.post('/updateFeedback', async (req, res) => {
     const { student_id,question,feedback} = req.body;
     console.log(req.body);
     try {
-        // Find the feedback document by student_id and question
         let feedbackDoc = await feedbackModel.findOne({ student_id, question });
-
-        // If feedback document does not exist, create a new one
         if (!feedbackDoc) {
             feedbackDoc = new feedbackModel({
                 student_id,
@@ -103,18 +99,12 @@ app.post('/updateFeedback', async (req, res) => {
                 feedback,
             });
         } else {
-            // Update feedback if the document exists
             feedbackDoc.feedback = feedback;
         }
-
-        // Save the feedback document (either new or updated)
         console.log(feedbackDoc);
         await feedbackDoc.save();
-
-        // Respond with success message
         return res.json({ message: 'Feedback updated successfully' });
     } catch (error) {
-        // Handle errors
         console.error('Error updating feedback:', error);
         return res.status(500).json({ error: 'Internal server error' });
     }

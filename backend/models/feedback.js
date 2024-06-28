@@ -18,11 +18,11 @@ const feedbackSchema = new mongoose.Schema({
     default: ''
   },
   total_marks: {
-    type: Number, // Corrected type definition
+    type: Number,
     default:0
   },
   allocated_marks: {
-    type: Number, // Corrected type definition
+    type: Number,
     default:0
   },
   feedback: { 

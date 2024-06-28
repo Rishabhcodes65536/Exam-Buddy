@@ -38,7 +38,7 @@ class questionController{
 }
     static fetchApi = async (req, res) => {
     let retryCount = 0;
-    const maxRetry = 3; // Maximum number of retry attempts
+    const maxRetry = 3; 
     while (retryCount < maxRetry) {
         try {
             const latestQuestion = await questionModel.find({ topic: req.query.topic, student_id: req.session._id }).sort({ attempted_at: -1 }).limit(1);
@@ -71,48 +71,38 @@ class questionController{
                     "data": parsed_string,
                     "topic": req.query.topic,
                 });
-                return; // Exit the function if successful
+                return; 
             } else {
                 console.log("Parsed string not found.");
-                retryCount++; // Increment retry count
+                retryCount++;
             }
         } catch (err) {
             console.log(err);
-            retryCount++; // Increment retry count
+            retryCount++;
         }
     }
 
-    // If maxRetry attempts failed, redirect to the referrer
+
     console.log("Max retry attempts reached.");
     res.redirect(req.get('referer'));
 }
     static fetchMetaApi = async (req, res) => {
       let retryCount = 0;
-      const maxRetry = 3; // Maximum number of retry attempts
+      const maxRetry = 3; 
       while (retryCount < maxRetry) {
         try {
           const Question = req.query.topic;
-          // Make API call to fetch data
           const response = await axios.post(req.API_ENDPOINT, {
             question: Question,
           });
-          // console.log(response)
           let isQuestion = response.data.response.question;
           if (isQuestion) {
             console.log("yepp");
             const { question, steps, marks } = response.data.response;
             console.log(steps);
 
-            // Pair the steps with their order and sort by order
             const orderedSteps = steps.sort((a, b) => a.order - b.order);
             console.log("Ordered_steps=" + JSON.stringify(orderedSteps));
-            // // Shuffle the ordered steps to jumble the order
-            // const shuffledSteps = questionController.shuffleArray(orderedSteps);
-            // const correctOrder=shuffledSteps.map(step => step.order);
-            // const solutionStepsArray = shuffledSteps.map(step => step.solution_step);
-            // Generate random unique indices
-
-            // Generate random permutation from [0, n)
             const rishabhPerm = [];
             for (let i = 0; i < orderedSteps.length; i++) {
               rishabhPerm.push(i);
@@ -125,38 +115,35 @@ class questionController{
               ];
             }
 
-            // Assign correctOrder as permutation + 1
+
             const correctOrder = rishabhPerm.map((index) => index + 1);
 
-            // Create a new array of pairs {steps and RishabhPerm}
             const pairedSteps = orderedSteps.map((step, index) => ({
               step,
               rishabhPerm: rishabhPerm[index],
             }));
 
-            // Sort by the second element of the pairs
+            
             pairedSteps.sort((a, b) => a.rishabhPerm - b.rishabhPerm);
             console.log(rishabhPerm);
             console.log(pairedSteps);
-            // Iterate through the sorted pairs and construct solutionStepsArray
+            
             const solutionStepsArray = [];
             for (const pairedStep of pairedSteps) {
               solutionStepsArray.push(pairedStep.step.solution_step);
             }
 
-            // Log the results
+            
             console.log(solutionStepsArray);
             console.log(correctOrder);
-            // Encapsulate each solution_step string in quotes
+            
             const quotedStrings = solutionStepsArray.map((step) => `"${step}"`);
 
-            // Join all quoted strings using a delimiter that is unlikely to appear in the strings
-            const joinedString = quotedStrings.join("|"); // Use '|' or any other delimiter
+            
+            const joinedString = quotedStrings.join("|");
 
-            // Now split the joined string using the delimiter
-            const newArray = joinedString.split("|"); // Use the same delimiter
-
-            // Remove quotes from each element in newArray
+            
+            const newArray = joinedString.split("|"); 
             const finalArray = newArray.map((item) =>
               item.replace(/^"(.*)"$/, "$1")
             );
@@ -173,13 +160,12 @@ class questionController{
           } else {
             console.log("NOPEE!!");
             // res.redirect(req.get("referer"));
-            retryCount++; // Increment retry count
+            retryCount++;
           }
         } catch (error) {
-          retryCount++; // Increment retry count
+          retryCount++; 
         }
       }
-      // If maxRetry attempts failed, redirect to the referrer
       console.log("Max retry attempts reached.");
       res.redirect(req.get("referer"));
     }
@@ -188,12 +174,12 @@ class questionController{
 
 static handleSolution = async (req, res) => {
     let retryCount = 0;
-    const maxRetry = 3; // Maximum number of retry attempts
+    const maxRetry = 3; 
 
     while (retryCount < maxRetry) {
         try {
             console.log("Attempt:", retryCount + 1);
-            // Extract data from the form submission
+          
             console.log(req.body);
             const { solution, question, marks, final_answer } = req.body;
             if (!solution) {
@@ -203,7 +189,7 @@ static handleSolution = async (req, res) => {
                 final_answer = "";
             }
 
-            // Make POST request to the API
+            
             const SOLUTION_API = req.SOLUTION_API_ENDPOINT;
             const response_from_api = await axios.post(SOLUTION_API, {
                 question: question,
@@ -243,21 +229,18 @@ static handleSolution = async (req, res) => {
                 "user_solution": solution,
                 "final_answer": final_answer
             });
-            return; // Exit the function if successful
+            return; 
         } catch (error) {
             console.error('Error:', error);
-            retryCount++; // Increment retry count
+            retryCount++; 
         }
     }
-
-    // If maxRetry attempts failed, send Internal Server Error response
     console.log("Max retry attempts reached.");
     res.status(500).send('Internal Server Error');
 }
 
     static handleMetaSolution=async (req,res)=>{
         try {
-        // Extract data from the request
         console.log(req.body);
         const { question, steps, correctOrder, topic, total_marks,userResponse} = req.body;
         console.log(question,steps,correctOrder,topic,total_marks,userResponse);

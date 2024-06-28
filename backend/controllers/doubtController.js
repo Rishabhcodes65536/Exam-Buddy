@@ -1,5 +1,3 @@
-// controllers/doubtController.js
-
 import axios from 'axios';
 import Doubt from '../models/doubt.js';
 
@@ -8,10 +6,9 @@ class doubtController{
 
 static showDoubtsPrompt = async(req, res) =>{
   try {
-    // Render the doubts prompting page
     console.log("Entered here")
     const recentDoubts = await Doubt.find({ student_id: req.session._id })
-      .sort({ timestamp: -1 }) // Sort by timestamp in descending order
+      .sort({ timestamp: -1 }) 
       .limit(5);
 
     res.render('doubt.ejs', { "name": req.session.name.split(' ')[0], "_id": req.session._id,recentDoubts});
@@ -23,10 +20,8 @@ static showDoubtsPrompt = async(req, res) =>{
 static showSavedDoubtSummary = async (req, res) => {
   try {
     const { doubt_id } = req.params;
-    // Update the timestamp of the doubt to the current time
     await Doubt.findByIdAndUpdate(doubt_id, { timestamp: new Date() });
     const doubt = await Doubt.findById(doubt_id);
-    // Render the summary page with doubt details
     const question = doubt.question;
     const answer = doubt.answer;
     console.log(req.query);

@@ -1,16 +1,15 @@
 <div class="main-content flex-grow-1 d-flex flex-column align-items-start">
-        <!-- Welcome back header -->
+
         <header>
             <h1>Welcome back  <%=name%> </h1>
             <hr>
         </header>
 
-        <!-- Dashboard navbar -->
+
         <nav class="custom-navbar navbar navbar-expand-lg navbar-expand-md navbar-light mb-4">
             <div class="container">
                 <ul class="navbar-nav mr-auto">
                     <!-- Navigation items -->
-                    <!-- Add "Dashboard" -->
                     <li class="nav-item <%= page_id == '1' ? 'navbarsactive' : '' %>">
                         <a class="nav-link dash-nav" href="/dashboard?page=1">Overall Performance</a>
                     </li>

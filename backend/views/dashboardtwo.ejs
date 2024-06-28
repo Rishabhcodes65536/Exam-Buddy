@@ -1,6 +1,6 @@
 <%- include("./partials/header.ejs") %>
 <style>
-/* Light mode (default) variables */
+/* Light mode variables */
 :root {
     --table-bg-color: #ffffff;
     --table-text-color: #000000;
@@ -81,7 +81,7 @@
     background-color: #388E3C;
 }
 
-/* Progress label styling */
+
 .progress-label {
     position: absolute;
     left: 50%;
@@ -90,7 +90,7 @@
     color: var(--label-text-color);
 }
 
-/* Dark mode variables */
+
 body:has(.switch__input:checked)  .row {
     --table-bg-color: #1c2131;
     --table-text-color: #ffffff;
@@ -99,7 +99,7 @@ body:has(.switch__input:checked)  .row {
     --label-text-color: #ffffff;
 }
 
-/* Apply dark mode styles */
+
 body:has(.switch__input:checked) .col-md-12 .table {
     background-color: var(--table-bg-color);
     color: var(--table-text-color);
@@ -119,7 +119,7 @@ body:has(.switch__input:checked) .col-md-12 .progress-label {
 }
 
 
-/* Responsive styles */
+
 @media (max-width: 768px) {
   .dashboard {
     flex-direction: column;
@@ -201,7 +201,7 @@ body:has(.switch__input:checked) .col-md-12 .progress-label {
         </div>
     </div>
 
-    <!-- What Knolly Thinks Sidebar -->
+
     <div class="sidebar2" style="margin-left: auto;margin-top: 240px">
         <nav class="py-4">
             <ul class="nav flex-column">
@@ -209,7 +209,6 @@ body:has(.switch__input:checked) .col-md-12 .progress-label {
                 <li>Let's dive deeper into your subjects! You've aced <%=highest_topic.topic%> with an impressive accuracy of <%=highest_topic.accuracy%>%.</li>
                 <li>Looks like you need a little more practice in probability.</li>
                 <li>Don't worry, Exam Buddy has tons of practice questions to help you improve!</li>
-                <!-- Link to specific subject practice questions -->
             </ul>
         </nav>
     </div>
