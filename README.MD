@@ -94,3 +94,8 @@ cd backend
 npm install -g nodemon && npm install
 ```
 
+## Important Note
+
+*Please be aware that AI may sometimes produce incorrect or nonsensical answers, known as "hallucinations." Your active engagement, feedback, and continuous use of ExamBuddy will help improve the accuracy and performance of the AI model.*
+
+
