@@ -1,5 +1,3 @@
-// models/Doubt.js
-
 import mongoose from "mongoose"
 
 const doubtSchema = new mongoose.Schema({

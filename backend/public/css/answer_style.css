@@ -22,11 +22,11 @@ body {
         }
         .meta_container {
         background-color: #fff;
-        padding: 2%; /* Adjust padding as needed for spacing */
+        padding: 2%; 
         border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);/* Adjust box-shadow values */
-        width: 80%; /* Adjust the initial width if needed */
-        max-width: 60%; /* Ensure it doesn't overflow the viewport */
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        width: 80%; 
+        max-width: 90%; 
         }
 
         .title {
@@ -77,11 +77,16 @@ body {
 .marks_awarded,
 .feedback,
 .statement {
-    font-family: 'Arial', sans-serif; /* Professional-themed font */
-    text-align: center; /* Center text */
-    padding: 10px 0; /* Add padding */
+    font-family: 'Arial', sans-serif; 
+    text-align: center; 
+    padding: 10px 0;
 }
 
+@media (max-width: 790px){
+    .meta_container{
+        width:90vw
+    }
+}
 
 @media (max-width: 465px){
     .answer_container{

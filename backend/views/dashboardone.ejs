@@ -94,13 +94,13 @@
 </head>
 <body>
 <section class="d-flex flex-column align-items-stretch">
-    <!-- Include the sidebar -->
+    
     <%- include("./partials/side_navbar.ejs") %>
     <%- include('./partials/switch.ejs') %>
     
     <%- include("./partials/dashboard_navbar.ejs") %>
 
-    <!-- Main content -->
+    
     <div class="mb-4">
         <div class="row">
                 <p>Track the total number of questions attempted and answered correctly across Answer Mode and Metacognition Mode.</p>
@@ -113,7 +113,6 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <!-- Professional Leaderboard -->
                 <div class="leaderboard">
                     <h3 class="leaderboard-heading">Top Exam Buddy Students this Month</h3>
                     <ul class="leaderboard-list">
@@ -136,10 +135,9 @@
     </div>
 </section>
 
-  <!-- Scroll Top -->
+
 <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Preloader -->
 <div id="preloader"></div>
 
 <%- include('./partials/footer.ejs') %>

@@ -15,10 +15,10 @@ const metacognitionSchema = new mongoose.Schema({
   },
   topic: String,
   total_marks: {
-    type: Number, // Corrected type definition
+    type: Number,
   },
   allocated_marks: {
-    type: Number, // Corrected type definition
+    type: Number,
   },
   partial_mark_enabled:{type:Boolean,default:false},
   steps:[{

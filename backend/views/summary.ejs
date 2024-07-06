@@ -80,17 +80,13 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Toggle visibility of follow-up section
+        // cleck karne ke baad section visible kardo
         document.getElementById("followUpBtn").addEventListener("click", function () {
             document.getElementById("followUpSection").style.display = "block";
         });
 
-        // Submit follow-up question using form submission
         document.getElementById("followUpForm").addEventListener("submit", function (event) {
-            // Prevent default form submission behavior
             event.preventDefault();
-
-            // Submit the form
             this.submit();
         });
     });

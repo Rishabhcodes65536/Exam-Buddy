@@ -57,10 +57,10 @@ height: 100%;
   --shadow-dark: rgba(255, 255, 255, 0.1);
 
 
-  --nav-light: #ffffff; /* Light mode navbar background */
-  --nav-dark: #1f2a48; /* Dark mode navbar background */
-  --nav-text-light: #000000; /* Light mode navbar text color */
-  --nav-text-dark: #ffffff; /* Dark mode navbar text color */
+  --nav-light: #ffffff; 
+  --nav-dark: #1f2a48; 
+  --nav-text-light: #000000; 
+  --nav-text-dark: #ffffff; 
 
 
   --nav-shadow-light: rgba(0, 0, 0, 0.2);

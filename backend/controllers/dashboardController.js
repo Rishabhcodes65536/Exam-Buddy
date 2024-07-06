@@ -9,82 +9,6 @@ const getRandomInt = (min, max) => {
 
 
 class dashboardController {
-  //  static getQuestionStats = async (req, res) => {
-  //     try {
-
-  //         const questions = await questionModel.find({
-  //             student_id: req.session._id
-  //         });
-
-  //         const answerQuestions = questions.filter(question => {
-  //             return question.mode === 'answer' || !question.mode;
-  //         });
-  //         const metaQuestions = questions.filter(question => question.mode === 'metacognition');
-
-  //         const totalQuestions = questions.length;
-  //         const totalAnswerQuestions = answerQuestions.length;
-  //         const totalMetaQuestions = metaQuestions.length;
-
-  //         const rightAnswers = questions.reduce((acc, question) => {
-
-  //             if (question.allocated_marks === question.total_marks) {
-  //                 return acc + 1;
-  //             } else {
-  //                 return acc;
-  //             }
-  //         }, 0);
-  //         const rightAnswersMeta = metaQuestions.reduce((acc, question) => {
-  //             if (question.allocated_marks === question.total_marks) {
-  //                 return acc + 1;
-  //             } else {
-  //                 return acc;
-  //             }
-  //         }, 0);
-
-  //         const wrongAnswers = totalQuestions - rightAnswers;
-  //         const wrongAnswersMeta = totalMetaQuestions - rightAnswersMeta;
-
-  //         const notAttempted = 100 - (totalQuestions ? ((rightAnswers + wrongAnswers) / totalQuestions) * 100 : 0);
-  //         const notAttemptedMeta = 100 - (totalMetaQuestions ? ((rightAnswersMeta + wrongAnswersMeta) / totalMetaQuestions) * 100 : 0);
-
-  //         const chartData = [
-  //             { label: 'Right', value: rightAnswers },
-  //             { label: 'Right_meta', value: rightAnswersMeta },
-  //             { label: 'Wrong', value: wrongAnswers },
-  //             { label: 'Wrong_meta', value: wrongAnswersMeta },
-  //             { label: 'NA', value: notAttempted },
-  //             { label: 'NA_meta', value: notAttemptedMeta }
-  //         ];
-
-  //         console.log(chartData);
-  //         const requestData = {
-  //   number: 10
-  // };
-  // const headers = {
-  //   'Accept': '*/*',
-  //   'Content-Type': 'application/json'
-  // };
-  //         const TOP_STUDENTS=await axios.post('http://20.42.62.249:8084/internal/question_generation/analyse/analyse_with_top', requestData, { headers });
-  //         console.log(TOP_STUDENTS.data.student_rank_with_order);
-  //         const TOP_DATA=TOP_STUDENTS.data.student_rank_with_order;
-  //         res.render('dashboardone.ejs', {
-  //             "Right": chartData[0].value,
-  //             "Right_meta": chartData[1].value,
-  //             "Wrong": chartData[2].value,
-  //             "Wrong_meta": chartData[3].value,
-  //             "NA": chartData[4].value,
-  //             "NA_meta": chartData[5].value,
-  //             "page_id": '1',
-  //             "name": req.session.name.split(' ')[0],
-  //             LEADERBOARD:TOP_DATA
-  //         });
-  //     } catch (error) {
-  //         console.error('Error fetching question stats:', error);
-  //         throw error;
-  //     }
-  // }
-
-  //This code don't call the API instead formulates the logic itself
   static getQuestionStats = async (req, res) => {
     try {
       const questions = await questionModel.find({
@@ -138,8 +62,8 @@ class dashboardController {
 
       console.log(chartData);
 
-      // Top students logic
-      const number = 10; // Assuming you want the top 10 students
+      // Top students fetching logic
+      const number = 10;
 
       const pipeline = [
         {

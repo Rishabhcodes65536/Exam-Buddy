@@ -1,12 +1,12 @@
 import { Client, Account } from "appwrite";
 
 
-// Init your Web SDK
+//Web SDK
 const client = new Client();
 
 client
-    .setEndpoint('http://localhost/v1') // Your Appwrite Endpoint
-    .setProject('455x34dfkj') // Your project ID
+    .setEndpoint('http://localhost/v1') 
+    .setProject('455x34dfkj') 
 ;
 
 const account = new Account(client);

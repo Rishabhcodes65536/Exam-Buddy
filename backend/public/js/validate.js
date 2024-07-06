@@ -1,17 +1,17 @@
 document
   .getElementById("registrationForm")
   .addEventListener("submit", function (event) {
-    // Prevent form submission
+
     event.preventDefault();
 
-    // Clear previous error messages
+
     document.getElementById("nameError").textContent = "";
     document.getElementById("emailError").textContent = "";
     document.getElementById("passwordError").textContent = "";
     document.getElementById("confirmPasswordError").textContent = "";
     document.getElementById("occupationError").textContent = "";
 
-    // Get form values
+
     var name = document.getElementById("name").value.trim();
     var email = document.getElementById("email").value.trim();
     var password = document.getElementById("password").value.trim();
@@ -22,13 +22,13 @@ document
 
     var isValid = true;
 
-    // Validate name
+
     if (name === "") {
       document.getElementById("nameError").textContent = "Name is required.";
       isValid = false;
     }
 
-    // Validate email
+
     var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailPattern.test(email)) {
       document.getElementById("emailError").textContent =
@@ -36,7 +36,7 @@ document
       isValid = false;
     }
 
-    // Validate password
+
     if (password === "") {
       document.getElementById("passwordError").textContent =
         "Password is required.";
@@ -47,7 +47,7 @@ document
       isValid = false;
     }
 
-    // Validate confirm password
+
     if (confirmPassword === "") {
       document.getElementById("confirmPasswordError").textContent =
         "Please confirm your password.";
@@ -58,14 +58,13 @@ document
       isValid = false;
     }
 
-    // Validate occupation
+
     if (occupation === "") {
       document.getElementById("occupationError").textContent =
         "Occupation is required.";
       isValid = false;
     }
 
-    // If all validations pass, submit the form
     if (isValid) {
       this.submit();
     }

@@ -1,4 +1,3 @@
-<!-- views/answer.ejs -->
 <%- include("./partials/header.ejs")%>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fuzzco/party-js@3.0.0/dist/party.min.css">
 </head>
@@ -55,7 +54,7 @@ function goBack() {
     <label for="final_answer" class="form-label">Final Answer:</label>
     <textarea id="final_answer" class="form-control" name="final_answer"  required="true" rows="2" cols="50" class="Input-Box-Final" placeholder="Enter your answer here" onkeypress="handleKeyPress(event)"></textarea>
      <div class="container">
-        <!-- Buttons for integration, differentiation, and exponential -->
+        
         <label for="answer" class="form-label">Special Symbols:</label>
         <button type="button" onclick="appendToAnswer('∫')">∫</button>
         <button type="button" onclick="appendToAnswer('d/dx')">d/dx</button>
@@ -63,7 +62,7 @@ function goBack() {
         <button type="button" onclick="appendToAnswer('√')">√</button>
         <button type="button" onclick="appendToAnswer('∛')">∛</button>
     </div>
-    <button type="submit" class="btn btn-primary submit-btn " style="margin-bottom: 10px;">Submit</button>
+    <button type="submit" class="btn btn-primary submit-btn ai-call" style="margin-bottom: 10px;">Submit</button>
 <a href="javascript:void(0);" onclick="window.location.href = window.location.href;" class="btn btn-secondary submit-btn" style="margin-bottom: 10px;">Skip</a>
     <% } %>
             <h3 class="marks">Marks: <%= data.marks %></h3>
@@ -79,9 +78,9 @@ function goBack() {
                  <div class="statement">The solution steps you gave was <%-user_solution%></div>
                 <div class="statement">Your final answer was <%-final_answer%></div>
                 <div class="feedback-buttons">
-                    <!-- Thumbs up button -->
+                    
                     <button class="btn btn-success thumbs-up" onclick="updateFeedback('+1')">👍</button>
-                    <!-- Thumbs down button -->
+                    
                     <button class="btn btn-danger thumbs-down" onclick="updateFeedback('-1')">👎</button>
                 </div>
                 </div>
@@ -111,9 +110,9 @@ function goBack() {
                 <div class="statement">The solution steps you gave was <%-user_solution%></div>
                 <div class="statement">Your final answer was <%-final_answer%></div>
                 <div class="feedback-buttons-wrapper">
-                    <!-- Thumbs up button -->
+                    
                     <button class="btn btn-success thumbs-up" onclick="updateFeedback('+1')">👍</button>
-                    <!-- Thumbs down button -->
+                    
                     <button class="btn btn-danger thumbs-down" onclick="updateFeedback('-1')">👎</button>
                 </div>
             </div>

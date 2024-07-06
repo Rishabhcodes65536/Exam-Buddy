@@ -19,9 +19,7 @@ router.get('/', (req, res) => {
         case '3':
             dashboardController.getPracticeActivityData(req, res);
             break;
-        // Add cases for other pages as needed
         default:
-            // Handle invalid page
             dashboardController.getQuestionStats(req, res);
             break;
     }
